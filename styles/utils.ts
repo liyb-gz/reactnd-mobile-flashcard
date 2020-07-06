@@ -31,4 +31,9 @@ export const screen: ViewStyle = {
 
 export const container: ViewStyle = {
   flex: 1,
+  backgroundColor: 'white',
+};
+
+export const headerLeftIconSpacing: ViewStyle = {
+  marginLeft: 15,
 };
