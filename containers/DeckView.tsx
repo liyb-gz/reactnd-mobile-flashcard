@@ -1,7 +1,10 @@
 import React from 'react';
 import { View, FlatList } from 'react-native';
+import { Icon } from 'react-native-elements';
 import DeckCard from '../components/DeckCard';
 import { FlashCardData } from '../ts/interfaces';
+import styles from '../styles/styles';
+import { tealBlue } from '../styles/colors';
 
 const FakeData: FlashCardData = {
   React: {
@@ -31,11 +34,18 @@ const FakeData: FlashCardData = {
 
 const DeckView = () => {
   return (
-    <View>
+    <View style={styles.container}>
       <FlatList
         data={Object.keys(FakeData)}
         keyExtractor={(item) => FakeData[item].title}
         renderItem={({ item }) => <DeckCard deck={FakeData[item]} />}
+      />
+      <Icon
+        name="add"
+        reverse
+        color={tealBlue}
+        containerStyle={[styles.floatingButton, styles.shadowLg]}
+        onPress={() => {}}
       />
     </View>
   );
