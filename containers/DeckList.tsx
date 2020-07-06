@@ -41,7 +41,14 @@ const DeckList = ({ navigation }: DeckListProps) => {
       <FlatList
         data={Object.keys(FakeData)}
         keyExtractor={(item) => FakeData[item].title}
-        renderItem={({ item }) => <DeckCard deck={FakeData[item]} />}
+        renderItem={({ item }) => (
+          <DeckCard
+            deck={FakeData[item]}
+            onPress={() =>
+              navigation.navigate('DeckView', { deck: FakeData[item] })
+            }
+          />
+        )}
       />
       <Icon
         name="add"

@@ -1,14 +1,20 @@
 import React, { FunctionComponent } from 'react';
-import { View, Text } from 'react-native';
+import { TouchableOpacity, Text } from 'react-native';
 import styles from '../styles/styles';
 import { Deck } from '../ts/interfaces';
 
-const DeckCard: FunctionComponent<{ deck: Deck }> = ({ deck }) => {
+const DeckCard: FunctionComponent<{ deck: Deck; onPress: () => void }> = ({
+  deck,
+  onPress,
+}) => {
   return (
-    <View style={[styles.deckCard, styles.shadow]}>
+    <TouchableOpacity
+      style={[styles.deckCard, styles.shadow]}
+      onPress={onPress}
+    >
       <Text style={styles.deckCardTitle}>{deck.title}</Text>
       <Text>{deck.questions.length} cards</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 
