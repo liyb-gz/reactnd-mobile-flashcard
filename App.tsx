@@ -5,14 +5,16 @@ import { NavigationContainer } from '@react-navigation/native';
 import ModalStack from './navigations/ModalStack';
 
 import styles from './styles/styles';
+import { tealBlue } from './styles/colors';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.screen}>
-      <StatusBar style="auto" />
+    <SafeAreaProvider>
+      <StatusBar style="auto" backgroundColor={tealBlue} />
       <NavigationContainer>
         <ModalStack />
       </NavigationContainer>
-    </SafeAreaView>
+    </SafeAreaProvider>
   );
 }

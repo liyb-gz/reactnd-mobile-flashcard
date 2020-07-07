@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { View, FlatList } from 'react-native';
+import { SafeAreaView, FlatList } from 'react-native';
 
 import DeckCard from '../components/DeckCard';
 import { FlashCardData } from '../ts/interfaces';
@@ -37,7 +37,7 @@ const FakeData: FlashCardData = {
 
 const DeckList = ({ navigation }: MainStackProps<Routes.DeckList>) => {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <FlatList
         data={Object.keys(FakeData)}
         keyExtractor={(item) => FakeData[item].title}
@@ -56,7 +56,7 @@ const DeckList = ({ navigation }: MainStackProps<Routes.DeckList>) => {
           navigation.navigate(Routes.AddDeck);
         }}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 

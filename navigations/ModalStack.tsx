@@ -15,17 +15,22 @@ import AddCard from '../containers/AddCard';
 import AddDeck from '../containers/AddDeck';
 import MainStack from '../navigations/MainStack';
 import styles from '../styles/styles';
+import { white, dark } from '../styles/colors';
 
 const Stack = createStackNavigator<ModalStackParamList>();
 
-const ModalScreenOptions = (navigation: ModalStackNavigationProp) => ({
-  headerLeft: () => <Icon name="clear" onPress={navigation.goBack} />,
-  headerLeftContainerStyle: styles.headerLeftIconSpacing,
-});
-
 const ModalStack = () => {
   return (
-    <Stack.Navigator mode="modal">
+    <Stack.Navigator
+      mode="modal"
+      screenOptions={({ navigation }) => ({
+        headerLeft: () => (
+          <Icon name="clear" onPress={navigation.goBack} color={white} />
+        ),
+        headerLeftContainerStyle: styles.headerLeftIconSpacing,
+        headerTintColor: white,
+      })}
+    >
       <Stack.Screen
         name={Routes.MainStack}
         component={MainStack}
@@ -38,7 +43,7 @@ const ModalStack = () => {
         component={AddDeck}
         options={({ navigation }) => ({
           title: 'Add a new deck',
-          ...ModalScreenOptions(navigation),
+          headerStyle: styles.deckHeader,
         })}
       />
       <Stack.Screen
@@ -47,7 +52,7 @@ const ModalStack = () => {
         options={({ navigation }) => {
           return {
             title: 'Add a new card',
-            ...ModalScreenOptions(navigation),
+            headerStyle: styles.cardHeader,
           };
         }}
       />

@@ -7,19 +7,18 @@ import { tealBlue } from '../styles/colors';
 const AddDeck = () => {
   return (
     <View style={styles.container}>
-      <KeyboardAvoidingView behavior="padding">
-        <Input
-          placeholder="Deck name"
-          leftIcon={{ name: 'book', color: tealBlue }}
-          inputContainerStyle={styles.addDeckTextInputContainer}
-          inputStyle={styles.addDeckTextInput}
-        />
-        <Button
-          title="Add Deck"
-          buttonStyle={styles.tealBlueButton}
-          containerStyle={styles.buttonContainer}
-        />
-      </KeyboardAvoidingView>
+      <Input
+        placeholder="Deck name"
+        leftIcon={{ name: 'book', color: tealBlue }}
+        inputContainerStyle={styles.addDeckTextInputContainer}
+        inputStyle={styles.addDeckTextInput}
+      />
+
+      <Button
+        title="Add Deck"
+        buttonStyle={styles.tealBlueButton}
+        containerStyle={styles.buttonContainer}
+      />
     </View>
   );
 };

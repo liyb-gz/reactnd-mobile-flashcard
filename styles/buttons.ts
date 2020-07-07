@@ -6,8 +6,9 @@ export const tealBlueButton: ViewStyle = {
 };
 
 export const buttonContainer: ViewStyle = {
+  left: 10,
   paddingHorizontal: 10,
   position: 'absolute',
-  bottom: 0,
+  bottom: 20,
   width: '100%',
 };

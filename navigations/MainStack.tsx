@@ -3,6 +3,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import DeckList from '../containers/DeckList';
 import { MainStackParamList, Routes } from '../ts/navigation';
 import DeckView from '../containers/DeckView';
+import styles from '../styles/styles';
+import { white } from '../styles/colors';
 
 const Stack = createStackNavigator<MainStackParamList>();
 
@@ -22,6 +24,9 @@ const MainStack = () => {
         options={({ route }) => ({
           headerTitle: route.params.deck.title,
           headerBackTitle: 'Home',
+          headerStyle: styles.deckHeader,
+          headerTitleStyle: styles.deckHeaderText,
+          headerTintColor: white,
         })}
       />
     </Stack.Navigator>
