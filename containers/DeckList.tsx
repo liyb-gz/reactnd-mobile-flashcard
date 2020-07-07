@@ -1,13 +1,12 @@
 import React from 'react';
 
 import { View, FlatList } from 'react-native';
-import { Icon } from 'react-native-elements';
 
 import DeckCard from '../components/DeckCard';
 import { FlashCardData } from '../ts/interfaces';
 import styles from '../styles/styles';
-import { tealBlue } from '../styles/colors';
-import { DeckListProps } from '../ts/types';
+import { MainStackProps, Routes } from '../ts/types';
+import AddButton from '../components/AddButton';
 
 const FakeData: FlashCardData = {
   React: {
@@ -35,7 +34,7 @@ const FakeData: FlashCardData = {
   },
 };
 
-const DeckList = ({ navigation }: DeckListProps) => {
+const DeckList = ({ navigation }: MainStackProps<Routes.DeckList>) => {
   return (
     <View style={styles.container}>
       <FlatList
@@ -45,18 +44,15 @@ const DeckList = ({ navigation }: DeckListProps) => {
           <DeckCard
             deck={FakeData[item]}
             onPress={() =>
-              navigation.navigate('DeckView', { deck: FakeData[item] })
+              navigation.navigate(Routes.DeckView, { deck: FakeData[item] })
             }
           />
         )}
       />
-      <Icon
-        name="add"
-        reverse
-        color={tealBlue}
-        containerStyle={[styles.floatingButton, styles.shadowLg]}
+
+      <AddButton
         onPress={() => {
-          navigation.navigate('AddDeck');
+          navigation.navigate(Routes.AddDeck);
         }}
       />
     </View>

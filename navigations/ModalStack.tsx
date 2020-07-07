@@ -1,9 +1,8 @@
 import React from 'react';
-import { ModalStackParamList } from '../ts/types';
+import { ModalStackParamList, Routes } from '../ts/types';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
 
-import DeckList from '../containers/DeckList';
 import AddDeck from '../containers/AddDeck';
 import styles from '../styles/styles';
 import MainStack from '../navigations/MainStack';
@@ -14,14 +13,14 @@ const ModalStack = () => {
   return (
     <Stack.Navigator mode="modal">
       <Stack.Screen
-        name="MainStack"
+        name={Routes.MainStack}
         component={MainStack}
         options={{
           headerShown: false,
         }}
       />
       <Stack.Screen
-        name="AddDeck"
+        name={Routes.AddDeck}
         component={AddDeck}
         options={({ navigation }) => ({
           title: 'Add a new deck',
