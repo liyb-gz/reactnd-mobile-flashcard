@@ -7,6 +7,7 @@ import { FlashCardData } from '../ts/interfaces';
 import styles from '../styles/styles';
 import { MainStackProps, Routes } from '../ts/navigation';
 import AddButton from '../components/AddButton';
+import { tealBlue } from '../styles/colors';
 
 const FakeData: FlashCardData = {
   React: {
@@ -50,6 +51,7 @@ const DeckList = ({ navigation }: MainStackProps<Routes.DeckList>) => {
         )}
       />
       <AddButton
+        color={tealBlue}
         onPress={() => {
           navigation.navigate(Routes.AddDeck);
         }}

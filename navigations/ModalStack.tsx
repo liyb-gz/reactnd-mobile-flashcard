@@ -44,10 +44,12 @@ const ModalStack = () => {
       <Stack.Screen
         name={Routes.AddCard}
         component={AddCard}
-        options={({ navigation }) => ({
-          title: 'Add a new card',
-          ...ModalScreenOptions(navigation),
-        })}
+        options={({ navigation }) => {
+          return {
+            title: 'Add a new card',
+            ...ModalScreenOptions(navigation),
+          };
+        }}
       />
     </Stack.Navigator>
   );

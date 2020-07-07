@@ -14,4 +14,5 @@ export interface FlashCardData {
 
 export interface AddButtonProps {
   onPress: () => void;
+  color: string;
 }

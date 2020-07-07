@@ -12,8 +12,9 @@ const DeckCard: FunctionComponent<{ deck: Deck; onPress: () => void }> = ({
       style={[styles.deckCard, styles.shadow]}
       onPress={onPress}
     >
+      {/* TODO: Add icon here */}
       <Text style={styles.deckCardTitle}>{deck.title}</Text>
-      <Text>{deck.questions.length} cards</Text>
+      <Text style={styles.deckCardText}>{deck.questions.length} cards</Text>
     </TouchableOpacity>
   );
 };
