@@ -1,8 +1,7 @@
 import { ViewStyle } from 'react-native';
-import { tealBlue } from './colors';
+import { bottom } from './utils';
 
 export const floatingButton: ViewStyle = {
-  position: 'absolute',
-  bottom: 20,
+  ...bottom,
   right: 20,
 };

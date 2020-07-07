@@ -35,6 +35,15 @@ export const container: ViewStyle = {
   backgroundColor: 'white',
 };
 
+export const keyboardAvoidingView: ViewStyle = {
+  flex: 1,
+};
+
 export const headerLeftIconSpacing: ViewStyle = {
   marginLeft: 15,
+};
+
+export const bottom: ViewStyle = {
+  position: 'absolute',
+  bottom: 20,
 };
