@@ -1,12 +1,14 @@
 import React from 'react';
 import { View, Text, SafeAreaView } from 'react-native';
 import styles from '../styles/styles';
+import { Button } from 'react-native-elements';
 
 const AddDeck = () => {
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <Text>Testing</Text>
-    </SafeAreaView>
+      <Button title="Add Deck" />
+    </View>
   );
 };
 
