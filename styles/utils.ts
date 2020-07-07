@@ -31,6 +31,7 @@ export const screen: ViewStyle = {
 
 export const container: ViewStyle = {
   flex: 1,
+  padding: 10,
   backgroundColor: 'white',
 };
 

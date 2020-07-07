@@ -11,3 +11,7 @@ export interface Deck {
 export interface FlashCardData {
   [deckName: string]: Deck;
 }
+
+export interface AddButtonProps {
+  onPress: () => void;
+}

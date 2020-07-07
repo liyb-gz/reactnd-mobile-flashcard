@@ -5,7 +5,7 @@ import { View, FlatList } from 'react-native';
 import DeckCard from '../components/DeckCard';
 import { FlashCardData } from '../ts/interfaces';
 import styles from '../styles/styles';
-import { MainStackProps, Routes } from '../ts/types';
+import { MainStackProps, Routes } from '../ts/navigation';
 import AddButton from '../components/AddButton';
 
 const FakeData: FlashCardData = {
@@ -49,7 +49,6 @@ const DeckList = ({ navigation }: MainStackProps<Routes.DeckList>) => {
           />
         )}
       />
-
       <AddButton
         onPress={() => {
           navigation.navigate(Routes.AddDeck);

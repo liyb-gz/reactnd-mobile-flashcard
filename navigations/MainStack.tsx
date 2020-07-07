@@ -1,8 +1,9 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import DeckList from '../containers/DeckList';
-import { MainStackParamList, Routes } from '../ts/types';
+import { MainStackParamList, Routes } from '../ts/navigation';
 import DeckView from '../containers/DeckView';
+
 const Stack = createStackNavigator<MainStackParamList>();
 
 const MainStack = () => {

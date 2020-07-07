@@ -1,13 +1,27 @@
 import React from 'react';
-import { ModalStackParamList, Routes } from '../ts/types';
-import { createStackNavigator } from '@react-navigation/stack';
+import {
+  ModalStackParamList,
+  Routes,
+  ModalStackProps,
+  ModalStackNavigationProp,
+} from '../ts/navigation';
+import {
+  createStackNavigator,
+  StackNavigationOptions,
+} from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
 
+import AddCard from '../containers/AddCard';
 import AddDeck from '../containers/AddDeck';
-import styles from '../styles/styles';
 import MainStack from '../navigations/MainStack';
+import styles from '../styles/styles';
 
 const Stack = createStackNavigator<ModalStackParamList>();
+
+const ModalScreenOptions = (navigation: ModalStackNavigationProp) => ({
+  headerLeft: () => <Icon name="clear" onPress={navigation.goBack} />,
+  headerLeftContainerStyle: styles.headerLeftIconSpacing,
+});
 
 const ModalStack = () => {
   return (
@@ -24,8 +38,15 @@ const ModalStack = () => {
         component={AddDeck}
         options={({ navigation }) => ({
           title: 'Add a new deck',
-          headerLeft: () => <Icon name="clear" onPress={navigation.goBack} />,
-          headerLeftContainerStyle: styles.headerLeftIconSpacing,
+          ...ModalScreenOptions(navigation),
+        })}
+      />
+      <Stack.Screen
+        name={Routes.AddCard}
+        component={AddCard}
+        options={({ navigation }) => ({
+          title: 'Add a new card',
+          ...ModalScreenOptions(navigation),
         })}
       />
     </Stack.Navigator>
