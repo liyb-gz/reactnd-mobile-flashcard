@@ -29,6 +29,11 @@ export const screen: ViewStyle = {
   paddingTop: StatusBar.currentHeight /* for Android only */,
 };
 
+export const listContainer: ViewStyle = {
+  flex: 1,
+  backgroundColor: 'white',
+};
+
 export const container: ViewStyle = {
   flex: 1,
   padding: 10,

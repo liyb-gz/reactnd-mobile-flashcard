@@ -5,6 +5,7 @@ import * as floatingButton from './floatingButton';
 import * as textInput from './textInput';
 import * as buttons from './buttons';
 import * as deckHeader from './deckHeader';
+import * as questionItem from './questionItem';
 
 const styles = StyleSheet.create({
   ...deckCard,
@@ -13,6 +14,7 @@ const styles = StyleSheet.create({
   ...floatingButton,
   ...textInput,
   ...buttons,
+  ...questionItem,
 });
 
 export default styles;

@@ -4,11 +4,19 @@ import styles from '../styles/styles';
 import AddButton from '../components/AddButton';
 import { MainStackProps, Routes } from '../ts/navigation';
 import { violetRed } from '../styles/colors';
+import { FlatList } from 'react-native-gesture-handler';
+import QuestionItem from '../components/QuestionItem';
 
-const DeckView = ({ navigation }: MainStackProps<Routes.DeckView>) => {
+const DeckView = ({ navigation, route }: MainStackProps<Routes.DeckView>) => {
+  const { questions } = route.params.deck;
+
   return (
-    <View style={styles.container}>
-      <Text>Deck View</Text>
+    <View style={styles.listContainer}>
+      <FlatList
+        data={questions}
+        keyExtractor={(item) => item.questionText}
+        renderItem={({ item }) => <QuestionItem question={item} />}
+      />
       <AddButton
         color={violetRed}
         onPress={() => {

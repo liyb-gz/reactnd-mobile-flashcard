@@ -1,6 +1,6 @@
 export interface Question {
-  question: String;
-  answer: String;
+  questionText: string;
+  answer: string;
 }
 
 export interface Deck {
@@ -15,4 +15,8 @@ export interface FlashCardData {
 export interface AddButtonProps {
   onPress: () => void;
   color: string;
+}
+
+export interface QuestionItemProps {
+  question: Question;
 }
