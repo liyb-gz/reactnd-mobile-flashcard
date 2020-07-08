@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { View } from 'react-native';
 import styles from '../styles/styles';
 import { Button, Input } from 'react-native-elements';
@@ -6,10 +6,12 @@ import { tealBlue } from '../styles/colors';
 import { Routes, ModalStackProps } from '../ts/navigation';
 
 const AddDeck = ({ navigation }: ModalStackProps<Routes.AddDeck>) => {
+  const [deckName, setDeckName] = useState('');
+
   const handleSubmit = useCallback(() => {
-    console.log('handleSubmit');
+    console.log('handleSubmit, deckName:', deckName);
     navigation.goBack();
-  }, []);
+  }, [deckName]);
 
   return (
     <View style={styles.container}>
@@ -19,6 +21,9 @@ const AddDeck = ({ navigation }: ModalStackProps<Routes.AddDeck>) => {
         inputContainerStyle={styles.addDeckTextInputContainer}
         inputStyle={styles.addDeckTextInput}
         onSubmitEditing={handleSubmit}
+        value={deckName}
+        onChangeText={setDeckName}
+        autoFocus={true}
       />
 
       <Button

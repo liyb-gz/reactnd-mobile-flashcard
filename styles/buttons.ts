@@ -1,8 +1,12 @@
 import { ViewStyle, TextStyle } from 'react-native';
-import { tealBlue } from './colors';
+import { tealBlue, violetRed } from './colors';
 
 export const tealBlueButton: ViewStyle = {
   backgroundColor: tealBlue,
+};
+
+export const violetRedButton: ViewStyle = {
+  backgroundColor: violetRed,
 };
 
 export const buttonContainer: ViewStyle = {
