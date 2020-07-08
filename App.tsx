@@ -11,7 +11,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 export default function App() {
   return (
     <SafeAreaProvider>
-      <StatusBar style="auto" backgroundColor={tealBlue} />
+      <StatusBar style="auto" />
       <NavigationContainer>
         <ModalStack />
       </NavigationContainer>
