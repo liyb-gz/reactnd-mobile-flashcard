@@ -1,13 +1,12 @@
 import React from 'react';
 
-import { SafeAreaView, FlatList } from 'react-native';
+import { SafeAreaView, FlatList, View } from 'react-native';
 
 import DeckCard from '../components/DeckCard';
 import { FlashCardData } from '../ts/interfaces';
 import styles from '../styles/styles';
 import { MainStackProps, Routes } from '../ts/navigation';
-import AddButton from '../components/AddButton';
-import { tealBlue } from '../styles/colors';
+import { Button } from 'react-native-elements';
 
 const FakeData: FlashCardData = {
   React: {
@@ -130,12 +129,16 @@ const DeckList = ({ navigation }: MainStackProps<Routes.DeckList>) => {
           />
         )}
       />
-      <AddButton
-        color={tealBlue}
-        onPress={() => {
-          navigation.navigate(Routes.AddDeck);
-        }}
-      />
+      <View style={styles.bottomButtonContainer}>
+        <Button
+          title="Add Deck"
+          buttonStyle={styles.tealBlueButton}
+          containerStyle={styles.buttomButton}
+          onPress={() => {
+            navigation.navigate(Routes.AddDeck);
+          }}
+        />
+      </View>
     </SafeAreaView>
   );
 };
