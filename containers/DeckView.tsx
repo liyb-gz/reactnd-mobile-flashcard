@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { Button } from 'react-native-elements';
 import styles from '../styles/styles';
-import AddButton from '../components/AddButton';
 import { MainStackProps, Routes } from '../ts/navigation';
-import { violetRed } from '../styles/colors';
 import { FlatList } from 'react-native-gesture-handler';
 import QuestionItem from '../components/QuestionItem';
+import { bottomButtonContainer } from '../styles/buttons';
 
 const DeckView = ({ navigation, route }: MainStackProps<Routes.DeckView>) => {
   const { questions } = route.params.deck;
@@ -17,12 +17,24 @@ const DeckView = ({ navigation, route }: MainStackProps<Routes.DeckView>) => {
         keyExtractor={(item) => item.questionText}
         renderItem={({ item }) => <QuestionItem question={item} />}
       />
-      <AddButton
-        color={violetRed}
-        onPress={() => {
-          navigation.navigate(Routes.AddCard);
-        }}
-      />
+      <View style={bottomButtonContainer}>
+        <Button
+          title="Start Quiz"
+          buttonStyle={styles.violetRedButton}
+          containerStyle={styles.buttomButton}
+          onPress={() => {
+            navigation.navigate(Routes.Quiz, { questions });
+          }}
+        />
+        <Button
+          title="Add Card"
+          buttonStyle={styles.violetRedButton}
+          containerStyle={styles.buttomButton}
+          onPress={() => {
+            navigation.navigate(Routes.AddCard);
+          }}
+        />
+      </View>
     </View>
   );
 };

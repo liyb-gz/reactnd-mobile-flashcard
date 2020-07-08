@@ -21,6 +21,86 @@ const FakeData: FlashCardData = {
         questionText: 'Where do you make Ajax requests in React?',
         answer: 'The componentDidMount lifecycle event',
       },
+      {
+        questionText: 'What is React?',
+        answer: 'A library for managing user interfaces',
+      },
+      {
+        questionText: 'Where do you make Ajax requests in React?',
+        answer: 'The componentDidMount lifecycle event',
+      },
+      {
+        questionText: 'What is React?',
+        answer: 'A library for managing user interfaces',
+      },
+      {
+        questionText: 'Where do you make Ajax requests in React?',
+        answer: 'The componentDidMount lifecycle event',
+      },
+      {
+        questionText: 'What is React?',
+        answer: 'A library for managing user interfaces',
+      },
+      {
+        questionText: 'Where do you make Ajax requests in React?',
+        answer: 'The componentDidMount lifecycle event',
+      },
+      {
+        questionText: 'What is React?',
+        answer: 'A library for managing user interfaces',
+      },
+      {
+        questionText: 'Where do you make Ajax requests in React?',
+        answer: 'The componentDidMount lifecycle event',
+      },
+      {
+        questionText: 'What is React?',
+        answer: 'A library for managing user interfaces',
+      },
+      {
+        questionText: 'Where do you make Ajax requests in React?',
+        answer: 'The componentDidMount lifecycle event',
+      },
+      {
+        questionText: 'What is React?',
+        answer: 'A library for managing user interfaces',
+      },
+      {
+        questionText: 'Where do you make Ajax requests in React?',
+        answer: 'The componentDidMount lifecycle event',
+      },
+      {
+        questionText: 'What is React?',
+        answer: 'A library for managing user interfaces',
+      },
+      {
+        questionText: 'Where do you make Ajax requests in React?',
+        answer: 'The componentDidMount lifecycle event',
+      },
+      {
+        questionText: 'What is React?',
+        answer: 'A library for managing user interfaces',
+      },
+      {
+        questionText: 'Where do you make Ajax requests in React?',
+        answer: 'The componentDidMount lifecycle event',
+      },
+      {
+        questionText: 'What is React?',
+        answer: 'A library for managing user interfaces',
+      },
+      {
+        questionText: 'Where do you make Ajax requests in React?',
+        answer: 'The componentDidMount lifecycle event',
+      },
+      {
+        questionText: 'What is React?',
+        answer: 'A library for managing user interfaces',
+      },
+      {
+        questionText: 'Where do you make Ajax requests in React?',
+        answer: 'The componentDidMount lifecycle event',
+      },
     ],
   },
   JavaScript: {

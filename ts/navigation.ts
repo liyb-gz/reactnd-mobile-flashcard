@@ -1,6 +1,6 @@
 import { StackNavigationProp } from '@react-navigation/stack';
 import { CompositeNavigationProp, RouteProp } from '@react-navigation/native';
-import { Deck } from './interfaces';
+import { Deck, Question } from './interfaces';
 
 export enum Routes {
   MainStack = 'MainStack',
@@ -8,6 +8,7 @@ export enum Routes {
   DeckList = 'DeckList',
   DeckView = 'DeckView',
   AddCard = 'AddCard',
+  Quiz = 'Quiz',
 }
 
 export type ModalStackParamList = {
@@ -30,6 +31,7 @@ export type ModalStackProps<T extends keyof ModalStackParamList> = {
 export type MainStackParamList = {
   [Routes.DeckList]: undefined;
   [Routes.DeckView]: { deck: Deck };
+  [Routes.Quiz]: { questions: Question[] };
 };
 
 export type MainStackNavigationProp<

@@ -16,3 +16,13 @@ export const buttonContainer: ViewStyle = {
   bottom: 20,
   width: '100%',
 };
+
+export const bottomButtonContainer: ViewStyle = {
+  padding: 10,
+  flexDirection: 'row',
+};
+
+export const buttomButton: ViewStyle = {
+  flex: 1,
+  marginHorizontal: 5,
+};

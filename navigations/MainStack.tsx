@@ -5,6 +5,7 @@ import { MainStackParamList, Routes } from '../ts/navigation';
 import DeckView from '../containers/DeckView';
 import styles from '../styles/styles';
 import { white } from '../styles/colors';
+import Quiz from '../containers/Quiz';
 
 const Stack = createStackNavigator<MainStackParamList>();
 
@@ -27,6 +28,13 @@ const MainStack = () => {
           headerStyle: styles.deckHeader,
           headerTitleStyle: styles.deckHeaderText,
           headerTintColor: white,
+        })}
+      />
+      <Stack.Screen
+        name={Routes.Quiz}
+        component={Quiz}
+        options={() => ({
+          headerShown: false,
         })}
       />
     </Stack.Navigator>
