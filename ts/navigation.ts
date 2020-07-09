@@ -9,6 +9,7 @@ export enum Routes {
   DeckView = 'DeckView',
   AddCard = 'AddCard',
   Quiz = 'Quiz',
+  Result = 'Result',
 }
 
 export type ModalStackParamList = {
@@ -32,6 +33,7 @@ export type MainStackParamList = {
   [Routes.DeckList]: undefined;
   [Routes.DeckView]: { deck: Deck };
   [Routes.Quiz]: { questions: Question[] };
+  [Routes.Result]: undefined;
 };
 
 export type MainStackNavigationProp<

@@ -34,6 +34,15 @@ export const listContainer: ViewStyle = {
   backgroundColor: 'white',
 };
 
+export const inputContainer: ViewStyle = {
+  flex: 1,
+  paddingTop: 20,
+};
+
+export const flex: ViewStyle = {
+  flex: 1,
+};
+
 export const container: ViewStyle = {
   flex: 1,
   padding: 10,

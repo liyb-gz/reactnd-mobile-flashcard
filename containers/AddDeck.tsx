@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { View } from 'react-native';
+import { SafeAreaView, View } from 'react-native';
 import styles from '../styles/styles';
 import { Button, Input } from 'react-native-elements';
 import { tealBlue } from '../styles/colors';
@@ -15,28 +15,32 @@ const AddDeck = ({ navigation }: ModalStackProps<Routes.AddDeck>) => {
   }, [deckName]);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <StatusBar style="light" />
-      <Input
-        placeholder="Deck name"
-        leftIcon={{ name: 'book', color: tealBlue }}
-        inputContainerStyle={styles.addDeckTextInputContainer}
-        inputStyle={styles.addDeckTextInput}
-        onSubmitEditing={handleSubmit}
-        value={deckName}
-        onChangeText={setDeckName}
-        autoFocus={true}
-      />
+      <View style={styles.inputContainer}>
+        <Input
+          placeholder="Deck name"
+          leftIcon={{ name: 'book', color: tealBlue }}
+          inputContainerStyle={styles.addDeckTextInputContainer}
+          inputStyle={styles.addDeckTextInput}
+          onSubmitEditing={handleSubmit}
+          value={deckName}
+          onChangeText={setDeckName}
+          autoFocus={true}
+        />
+      </View>
 
       {/* TODO: submit button conditionally disabled*/}
 
-      <Button
-        title="Add Deck"
-        buttonStyle={styles.tealBlueButton}
-        containerStyle={styles.buttonContainer}
-        onPress={handleSubmit}
-      />
-    </View>
+      <View style={styles.bottomButtonContainer}>
+        <Button
+          title="Add Deck"
+          buttonStyle={styles.tealBlueButton}
+          containerStyle={styles.buttomButton}
+          onPress={handleSubmit}
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 

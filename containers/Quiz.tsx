@@ -28,8 +28,7 @@ const Quiz = ({ navigation, route }: MainStackProps<Routes.Quiz>) => {
         setHasFlipped(false);
         setIsFlipped(false);
       } else {
-        //   TODO: Show result card
-        navigation.goBack();
+        navigation.replace(Routes.Result);
       }
     },
     [numOfCorrect, currentIndex, hasFlipped, isFlipped]

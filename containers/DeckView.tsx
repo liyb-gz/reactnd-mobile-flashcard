@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { SafeAreaView, View } from 'react-native';
 import { Button } from 'react-native-elements';
 import styles from '../styles/styles';
 import { MainStackProps, Routes } from '../ts/navigation';
@@ -12,7 +12,7 @@ const DeckView = ({ navigation, route }: MainStackProps<Routes.DeckView>) => {
   const { questions } = route.params.deck;
 
   return (
-    <View style={styles.listContainer}>
+    <SafeAreaView style={styles.listContainer}>
       <StatusBar style="light" />
       <FlatList
         data={questions}
@@ -37,7 +37,7 @@ const DeckView = ({ navigation, route }: MainStackProps<Routes.DeckView>) => {
           }}
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

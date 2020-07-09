@@ -6,6 +6,7 @@ import DeckView from '../containers/DeckView';
 import styles from '../styles/styles';
 import { white } from '../styles/colors';
 import Quiz from '../containers/Quiz';
+import Result from '../containers/Result';
 
 const Stack = createStackNavigator<MainStackParamList>();
 
@@ -34,6 +35,7 @@ const MainStack = () => {
         })}
       />
       <Stack.Screen name={Routes.Quiz} component={Quiz} />
+      <Stack.Screen name={Routes.Result} component={Result} />
     </Stack.Navigator>
   );
 };

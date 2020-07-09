@@ -9,10 +9,10 @@ export const redButton: ViewStyle = {
 };
 
 export const buttonContainer: ViewStyle = {
-  left: 10,
+  // left: 10,
   paddingHorizontal: 10,
   position: 'absolute',
-  bottom: 20,
+  bottom: 10,
   width: '100%',
 };
 
