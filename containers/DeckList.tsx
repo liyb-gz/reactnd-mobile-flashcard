@@ -13,92 +13,45 @@ const FakeData: FlashCardData = {
     title: 'React',
     questions: [
       {
-        questionText: 'What is React?',
-        answer: 'A library for managing user interfaces',
+        questionText: 'What is the capital of Chile?',
+        answer: 'Santiago',
       },
       {
-        questionText: 'Where do you make Ajax requests in React?',
-        answer: 'The componentDidMount lifecycle event',
+        questionText: 'What is the highest mountain in Britain?',
+        answer: 'Ben Nevis',
       },
       {
-        questionText: 'What is React?',
-        answer: 'A library for managing user interfaces',
+        questionText: 'What is the smallest country in the world?',
+        answer: 'Vatican City',
       },
       {
-        questionText: 'Where do you make Ajax requests in React?',
-        answer: 'The componentDidMount lifecycle event',
+        questionText: 'Alberta is a province of which country?',
+        answer: 'Canada',
       },
       {
-        questionText: 'What is React?',
-        answer: 'A library for managing user interfaces',
+        questionText: 'How many countries still have the shilling as currency?',
+        answer: 'Four – Kenya, Uganda, Tanzania and Somalia',
       },
       {
-        questionText: 'Where do you make Ajax requests in React?',
-        answer: 'The componentDidMount lifecycle event',
+        questionText:
+          'Which is the only vowel not used as the first letter in a US State?',
+        answer: 'E',
       },
       {
-        questionText: 'What is React?',
-        answer: 'A library for managing user interfaces',
+        questionText: 'What is the largest country in the world?',
+        answer: 'Russia',
       },
       {
-        questionText: 'Where do you make Ajax requests in React?',
-        answer: 'The componentDidMount lifecycle event',
+        questionText: 'Where would you find the River Thames?',
+        answer: 'London, UK',
       },
       {
-        questionText: 'What is React?',
-        answer: 'A library for managing user interfaces',
+        questionText: 'What is the hottest continent on Earth?',
+        answer: 'Africa',
       },
       {
-        questionText: 'Where do you make Ajax requests in React?',
-        answer: 'The componentDidMount lifecycle event',
-      },
-      {
-        questionText: 'What is React?',
-        answer: 'A library for managing user interfaces',
-      },
-      {
-        questionText: 'Where do you make Ajax requests in React?',
-        answer: 'The componentDidMount lifecycle event',
-      },
-      {
-        questionText: 'What is React?',
-        answer: 'A library for managing user interfaces',
-      },
-      {
-        questionText: 'Where do you make Ajax requests in React?',
-        answer: 'The componentDidMount lifecycle event',
-      },
-      {
-        questionText: 'What is React?',
-        answer: 'A library for managing user interfaces',
-      },
-      {
-        questionText: 'Where do you make Ajax requests in React?',
-        answer: 'The componentDidMount lifecycle event',
-      },
-      {
-        questionText: 'What is React?',
-        answer: 'A library for managing user interfaces',
-      },
-      {
-        questionText: 'Where do you make Ajax requests in React?',
-        answer: 'The componentDidMount lifecycle event',
-      },
-      {
-        questionText: 'What is React?',
-        answer: 'A library for managing user interfaces',
-      },
-      {
-        questionText: 'Where do you make Ajax requests in React?',
-        answer: 'The componentDidMount lifecycle event',
-      },
-      {
-        questionText: 'What is React?',
-        answer: 'A library for managing user interfaces',
-      },
-      {
-        questionText: 'Where do you make Ajax requests in React?',
-        answer: 'The componentDidMount lifecycle event',
+        questionText: 'What is the longest river in the world?',
+        answer: 'River Nile',
       },
     ],
   },

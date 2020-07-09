@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, SafeAreaView } from 'react-native';
+import React, { useState, useCallback } from 'react';
+import { View, SafeAreaView, TouchableWithoutFeedback } from 'react-native';
 import styles from '../styles/styles';
 import ProgressBar from 'react-native-progress/Bar';
 import QuizCard from '../components/QuizCard';
@@ -10,28 +10,59 @@ import FlipCard from 'react-native-flip-card';
 import { Button } from 'react-native-elements';
 
 const Quiz = ({ navigation, route }: MainStackProps<Routes.Quiz>) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [numOfCorrect, setNumOfCorrect] = useState(0);
+  const [isFlipped, setIsFlipped] = useState(false);
   const [hasFlipped, setHasFlipped] = useState(false);
+
   const { questions } = route.params;
+  const handleSubmit: (props: { correct: boolean }) => void = useCallback(
+    ({ correct }) => {
+      if (correct) {
+        setNumOfCorrect((val) => val + 1);
+      }
+      if (currentIndex + 1 < questions.length) {
+        setCurrentIndex((val) => val + 1);
+        setHasFlipped(false);
+        setIsFlipped(false);
+      } else {
+        //   TODO: Show result card
+        navigation.goBack();
+      }
+    },
+    [numOfCorrect, currentIndex, hasFlipped, isFlipped]
+  );
+
+  const handlePress = useCallback(() => {
+    setHasFlipped(true);
+    setIsFlipped((val) => !val);
+  }, [hasFlipped, isFlipped]);
+
   return (
     <SafeAreaView style={[styles.screen, styles.container]}>
       <StatusBar style="light" />
       <View style={styles.container}>
         <ProgressBar
-          progress={0.3}
+          progress={numOfCorrect / questions.length}
           width={null}
           style={styles.progressBar}
           color={tealBlue}
         />
-        <FlipCard
-          flipHorizontal={true}
-          flipVertical={false}
-          onFlipStart={() => {
-            setHasFlipped(true);
-          }}
-        >
-          <QuizCard question={questions[0]} hideAnswer />
-          <QuizCard question={questions[0]} />
-        </FlipCard>
+        <TouchableWithoutFeedback onPress={handlePress}>
+          <FlipCard
+            flip={isFlipped}
+            flipHorizontal={true}
+            flipVertical={false}
+            clickable={false}
+          >
+            {/* Front Side */}
+            <QuizCard question={questions[currentIndex]} hideAnswer />
+
+            {/* Back Side */}
+            <QuizCard question={questions[currentIndex]} />
+          </FlipCard>
+        </TouchableWithoutFeedback>
+
         {hasFlipped && (
           <View style={styles.bottomButtonContainerWithoutPadding}>
             <Button
@@ -39,15 +70,15 @@ const Quiz = ({ navigation, route }: MainStackProps<Routes.Quiz>) => {
               buttonStyle={styles.tealBlueButton}
               containerStyle={styles.buttomButton}
               onPress={() => {
-                console.log('next question, correct answer');
+                handleSubmit({ correct: true });
               }}
             />
             <Button
               title="Incorrect"
-              buttonStyle={styles.tealBlueButton}
+              buttonStyle={styles.redButton}
               containerStyle={styles.buttomButton}
               onPress={() => {
-                console.log('next question, incorrect answer');
+                handleSubmit({ correct: false });
               }}
             />
           </View>
