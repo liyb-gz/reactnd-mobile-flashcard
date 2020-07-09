@@ -1,12 +1,8 @@
 import { ViewStyle, TextStyle } from 'react-native';
-import { tealBlue, violetRed } from './colors';
+import { tealBlue } from './colors';
 
 export const tealBlueButton: ViewStyle = {
   backgroundColor: tealBlue,
-};
-
-export const violetRedButton: ViewStyle = {
-  backgroundColor: violetRed,
 };
 
 export const buttonContainer: ViewStyle = {
@@ -19,6 +15,10 @@ export const buttonContainer: ViewStyle = {
 
 export const bottomButtonContainer: ViewStyle = {
   padding: 10,
+  flexDirection: 'row',
+};
+
+export const bottomButtonContainerWithoutPadding: ViewStyle = {
   flexDirection: 'row',
 };
 

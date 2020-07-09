@@ -8,6 +8,7 @@ export const questionItemContainer: ViewStyle = {
 
 export const questionItemQuestionText: TextStyle = {
   fontWeight: 'bold',
+  paddingBottom: 10,
 };
 
 export const questionItemAnswerText: TextStyle = {

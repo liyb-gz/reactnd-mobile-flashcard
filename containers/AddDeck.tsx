@@ -4,6 +4,7 @@ import styles from '../styles/styles';
 import { Button, Input } from 'react-native-elements';
 import { tealBlue } from '../styles/colors';
 import { Routes, ModalStackProps } from '../ts/navigation';
+import { StatusBar } from 'expo-status-bar';
 
 const AddDeck = ({ navigation }: ModalStackProps<Routes.AddDeck>) => {
   const [deckName, setDeckName] = useState('');
@@ -15,6 +16,7 @@ const AddDeck = ({ navigation }: ModalStackProps<Routes.AddDeck>) => {
 
   return (
     <View style={styles.container}>
+      <StatusBar style="light" />
       <Input
         placeholder="Deck name"
         leftIcon={{ name: 'book', color: tealBlue }}
@@ -25,6 +27,8 @@ const AddDeck = ({ navigation }: ModalStackProps<Routes.AddDeck>) => {
         onChangeText={setDeckName}
         autoFocus={true}
       />
+
+      {/* TODO: submit button conditionally disabled*/}
 
       <Button
         title="Add Deck"

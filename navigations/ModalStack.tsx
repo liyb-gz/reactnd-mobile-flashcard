@@ -29,6 +29,7 @@ const ModalStack = () => {
         ),
         headerLeftContainerStyle: styles.headerLeftIconSpacing,
         headerTintColor: white,
+        headerStyle: styles.header,
       })}
     >
       <Stack.Screen
@@ -43,7 +44,6 @@ const ModalStack = () => {
         component={AddDeck}
         options={({ navigation }) => ({
           title: 'Add a new deck',
-          headerStyle: styles.deckHeader,
         })}
       />
       <Stack.Screen
@@ -52,7 +52,6 @@ const ModalStack = () => {
         options={({ navigation }) => {
           return {
             title: 'Add a new card',
-            headerStyle: styles.cardHeader,
           };
         }}
       />

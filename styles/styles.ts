@@ -6,6 +6,8 @@ import * as textInput from './textInput';
 import * as buttons from './buttons';
 import * as deckHeader from './deckHeader';
 import * as questionItem from './questionItem';
+import * as progressBar from './progressBar';
+import * as quizCard from './quizCard';
 
 const styles = StyleSheet.create({
   ...deckCard,
@@ -15,6 +17,8 @@ const styles = StyleSheet.create({
   ...textInput,
   ...buttons,
   ...questionItem,
+  ...progressBar,
+  ...quizCard,
 });
 
 export default styles;

@@ -1,26 +1,14 @@
 import { ViewStyle, TextStyle } from 'react-native';
-import { white, tealBlue, violetRed } from './colors';
+import { white, tealBlue } from './colors';
 
-export const deckHeader: ViewStyle = {
+export const header: ViewStyle = {
   backgroundColor: tealBlue,
 };
 
-export const deckHeaderText: TextStyle = {
+export const headerText: TextStyle = {
   color: white,
 };
 
-export const deckHeaderIcon: TextStyle = {
-  color: white,
-};
-
-export const cardHeader: ViewStyle = {
-  backgroundColor: violetRed,
-};
-
-export const cardHeaderText: TextStyle = {
-  color: white,
-};
-
-export const cardHeaderIcon: TextStyle = {
+export const headerIcon: TextStyle = {
   color: white,
 };

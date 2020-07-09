@@ -1,5 +1,5 @@
 import { ViewStyle, TextStyle, View } from 'react-native';
-import { tealBlue, violetRed, dark } from './colors';
+import { tealBlue, dark } from './colors';
 
 export const addDeckTextInput: TextStyle = {
   color: dark,
@@ -14,5 +14,5 @@ export const addCardTextInput: TextStyle = {
 };
 
 export const addCardTextInputContainer: ViewStyle = {
-  borderBottomColor: violetRed,
+  borderBottomColor: tealBlue,
 };

@@ -11,7 +11,13 @@ const Stack = createStackNavigator<MainStackParamList>();
 
 const MainStack = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: styles.header,
+        headerTitleStyle: styles.headerText,
+        headerTintColor: white,
+      }}
+    >
       <Stack.Screen
         name={Routes.DeckList}
         component={DeckList}
@@ -25,18 +31,9 @@ const MainStack = () => {
         options={({ route }) => ({
           headerTitle: route.params.deck.title,
           headerBackTitle: 'Home',
-          headerStyle: styles.deckHeader,
-          headerTitleStyle: styles.deckHeaderText,
-          headerTintColor: white,
         })}
       />
-      <Stack.Screen
-        name={Routes.Quiz}
-        component={Quiz}
-        options={() => ({
-          headerShown: false,
-        })}
-      />
+      <Stack.Screen name={Routes.Quiz} component={Quiz} />
     </Stack.Navigator>
   );
 };

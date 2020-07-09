@@ -4,4 +4,3 @@ export const greenSheen = '#70a9a1';
 export const tealBlue = '#40798c';
 export const dark = '#0b2027';
 export const white = '#ffffff';
-export const violetRed = '#f75590';

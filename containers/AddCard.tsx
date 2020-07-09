@@ -1,9 +1,10 @@
 import React, { useCallback, useState, createRef } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { Button, Input } from 'react-native-elements';
 import styles from '../styles/styles';
 import { Routes, ModalStackProps } from '../ts/navigation';
-import { violetRed } from '../styles/colors';
+import { tealBlue } from '../styles/colors';
+import { StatusBar } from 'expo-status-bar';
 
 const AddCard = ({ navigation }: ModalStackProps<Routes.AddCard>) => {
   const answerInput = createRef<Input>();
@@ -18,11 +19,13 @@ const AddCard = ({ navigation }: ModalStackProps<Routes.AddCard>) => {
 
   return (
     <View style={styles.container}>
+      <StatusBar style="light" />
+
       <Input
         value={question}
         onChangeText={setQuestion}
         placeholder="Question"
-        leftIcon={{ name: 'help', color: violetRed }}
+        leftIcon={{ name: 'help', color: tealBlue }}
         inputContainerStyle={styles.addCardTextInputContainer}
         inputStyle={styles.addCardTextInput}
         returnKeyType="next"
@@ -37,16 +40,18 @@ const AddCard = ({ navigation }: ModalStackProps<Routes.AddCard>) => {
         value={answer}
         onChangeText={setAnswer}
         placeholder="Answer"
-        leftIcon={{ name: 'comment', color: violetRed }}
+        leftIcon={{ name: 'comment', color: tealBlue }}
         inputContainerStyle={styles.addCardTextInputContainer}
         inputStyle={styles.addCardTextInput}
         onSubmitEditing={handleSubmit}
         ref={answerInput}
       />
 
+      {/* TODO: submit button conditionally disabled*/}
+
       <Button
         title="Add Card"
-        buttonStyle={styles.violetRedButton}
+        buttonStyle={styles.tealBlueButton}
         containerStyle={styles.buttonContainer}
         onPress={handleSubmit}
       />
