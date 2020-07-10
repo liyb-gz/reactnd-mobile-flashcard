@@ -8,7 +8,6 @@ import { tealBlue, lightgray } from '../styles/colors';
 import { StatusBar } from 'expo-status-bar';
 import FlipCard from 'react-native-flip-card';
 import { Button } from 'react-native-elements';
-import shuffle from 'lodash/shuffle';
 
 const Quiz = ({ navigation, route }: MainStackProps<Routes.Quiz>) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -16,7 +15,7 @@ const Quiz = ({ navigation, route }: MainStackProps<Routes.Quiz>) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [hasFlipped, setHasFlipped] = useState(false);
 
-  const questions = shuffle(route.params.questions);
+  const { questions } = route.params;
 
   const handleSubmit: (props: { correct: boolean }) => void = useCallback(
     ({ correct }) => {

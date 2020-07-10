@@ -7,6 +7,7 @@ import { FlatList } from 'react-native-gesture-handler';
 import QuestionItem from '../components/QuestionItem';
 import { bottomButtonContainer } from '../styles/buttons';
 import { StatusBar } from 'expo-status-bar';
+import shuffle from 'lodash/shuffle';
 
 const DeckView = ({ navigation, route }: MainStackProps<Routes.DeckView>) => {
   const { questions } = route.params.deck;
@@ -25,7 +26,7 @@ const DeckView = ({ navigation, route }: MainStackProps<Routes.DeckView>) => {
           buttonStyle={styles.tealBlueButton}
           containerStyle={styles.buttomButton}
           onPress={() => {
-            navigation.navigate(Routes.Quiz, { questions });
+            navigation.navigate(Routes.Quiz, { questions: shuffle(questions) });
           }}
         />
         <Button
