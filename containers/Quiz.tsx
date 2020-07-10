@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { View, SafeAreaView, TouchableWithoutFeedback } from 'react-native';
 import styles from '../styles/styles';
 import ProgressBar from 'react-native-progress/Bar';
@@ -12,6 +12,7 @@ import { Button } from 'react-native-elements';
 const Quiz = ({ navigation, route }: MainStackProps<Routes.Quiz>) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [numOfCorrect, setNumOfCorrect] = useState(0);
+  const [shouldShowResult, setShouldShowResult] = useState(false);
   const [isFlipped, setIsFlipped] = useState(false);
   const [hasFlipped, setHasFlipped] = useState(false);
 
@@ -27,11 +28,21 @@ const Quiz = ({ navigation, route }: MainStackProps<Routes.Quiz>) => {
         setHasFlipped(false);
         setIsFlipped(false);
       } else {
-        navigation.replace(Routes.Result);
+        setShouldShowResult(true);
       }
     },
-    [numOfCorrect, currentIndex, hasFlipped, isFlipped]
+    [numOfCorrect, currentIndex, hasFlipped, isFlipped, shouldShowResult]
   );
+
+  useEffect(() => {
+    if (shouldShowResult) {
+      navigation.replace(Routes.Result, {
+        percentage: (numOfCorrect / questions.length) * 100,
+        numOfCorrect,
+        numOfQuestions: questions.length,
+      });
+    }
+  }, [shouldShowResult]);
 
   const handlePress = useCallback(() => {
     setHasFlipped(true);
