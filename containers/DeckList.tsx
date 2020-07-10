@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SafeAreaView, FlatList, View } from 'react-native';
+import { SafeAreaView, FlatList, View, Text } from 'react-native';
 
 import DeckCard from '../components/DeckCard';
 import { FlashCardData } from '../ts/interfaces';
@@ -65,6 +65,10 @@ const FakeData: FlashCardData = {
       },
     ],
   },
+  Vue: {
+    title: 'Vue',
+    questions: [],
+  },
 };
 
 const DeckList = ({ navigation }: MainStackProps<Routes.DeckList>) => {
@@ -80,6 +84,11 @@ const DeckList = ({ navigation }: MainStackProps<Routes.DeckList>) => {
               navigation.navigate(Routes.DeckView, { deck: FakeData[item] })
             }
           />
+        )}
+        ListEmptyComponent={() => (
+          <View style={styles.listEmpty}>
+            <Text style={styles.listEmptyText}>Add a deck to get started</Text>
+          </View>
         )}
       />
       <View style={styles.bottomButtonContainer}>

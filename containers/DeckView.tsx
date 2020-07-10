@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, View } from 'react-native';
+import { SafeAreaView, View, Text } from 'react-native';
 import { Button } from 'react-native-elements';
 import styles from '../styles/styles';
 import { MainStackProps, Routes } from '../ts/navigation';
@@ -19,10 +19,16 @@ const DeckView = ({ navigation, route }: MainStackProps<Routes.DeckView>) => {
         data={questions}
         keyExtractor={(item) => item.questionText}
         renderItem={({ item }) => <QuestionItem question={item} />}
+        ListEmptyComponent={() => (
+          <View style={styles.listEmpty}>
+            <Text style={styles.listEmptyText}>Add a card to get started</Text>
+          </View>
+        )}
       />
       <View style={bottomButtonContainer}>
         <Button
           title="Start Quiz"
+          disabled={questions.length === 0}
           buttonStyle={styles.tealBlueButton}
           containerStyle={styles.buttomButton}
           onPress={() => {
