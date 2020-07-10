@@ -74,6 +74,7 @@ const FakeData: FlashCardData = {
 const DeckList = ({ navigation }: MainStackProps<Routes.DeckList>) => {
   return (
     <SafeAreaView style={[styles.container, styles.screen]}>
+      {/* TODO: Add swipe action */}
       <FlatList
         data={Object.keys(FakeData)}
         keyExtractor={(item) => FakeData[item].title}

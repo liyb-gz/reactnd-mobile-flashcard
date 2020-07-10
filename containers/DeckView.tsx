@@ -15,6 +15,7 @@ const DeckView = ({ navigation, route }: MainStackProps<Routes.DeckView>) => {
   return (
     <SafeAreaView style={styles.listContainer}>
       <StatusBar style="light" />
+      {/* TODO: Add swipe action */}
       <FlatList
         data={questions}
         keyExtractor={(item) => item.questionText}
