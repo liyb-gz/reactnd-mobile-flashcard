@@ -5,3 +5,4 @@ export const tealBlue = '#40798c';
 export const dark = '#0b2027';
 export const white = '#ffffff';
 export const red = '#bc412b';
+export const lightgray = 'lightgray';

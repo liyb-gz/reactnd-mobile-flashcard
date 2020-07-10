@@ -8,6 +8,7 @@ import * as deckHeader from './deckHeader';
 import * as questionItem from './questionItem';
 import * as progressBar from './progressBar';
 import * as quizCard from './quizCard';
+import * as result from './result';
 
 const styles = StyleSheet.create({
   ...deckCard,
@@ -19,6 +20,7 @@ const styles = StyleSheet.create({
   ...questionItem,
   ...progressBar,
   ...quizCard,
+  ...result,
 });
 
 export default styles;
