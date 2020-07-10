@@ -1,4 +1,5 @@
 import { ViewStyle, Platform, StatusBar } from 'react-native';
+import { white } from './colors';
 
 export const shadow: ViewStyle = {
   shadowColor: '#000',
@@ -31,7 +32,7 @@ export const screen: ViewStyle = {
 
 export const listContainer: ViewStyle = {
   flex: 1,
-  backgroundColor: 'white',
+  backgroundColor: white,
 };
 
 export const inputContainer: ViewStyle = {
@@ -46,7 +47,7 @@ export const flex: ViewStyle = {
 export const container: ViewStyle = {
   flex: 1,
   padding: 10,
-  backgroundColor: 'white',
+  backgroundColor: white,
 };
 
 export const keyboardAvoidingView: ViewStyle = {
