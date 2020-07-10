@@ -6,19 +6,20 @@ import { tealBlue, lightgray } from '../styles/colors';
 import { Button } from 'react-native-elements';
 import { MainStackProps, Routes } from '../ts/navigation';
 
-const Result = ({ navigation }: MainStackProps<Routes.Result>) => {
+const Result = ({ navigation, route }: MainStackProps<Routes.Result>) => {
   const screenWidth = Math.round(Dimensions.get('window').width);
+  const { percentage, numOfCorrect, numOfQuestions } = route.params;
   return (
     <SafeAreaView style={styles.container}>
       <AnimatedCircularProgress
         size={screenWidth * 0.6667}
         width={20}
-        fill={80}
+        fill={percentage}
         rotation={0}
         tintColor={tealBlue}
         duration={1000}
         backgroundColor={lightgray}
-        style={[styles.circularProgress]}
+        style={styles.circularProgress}
       >
         {(fill) => (
           <View style={styles.circularProgressTextContainer}>
@@ -27,10 +28,10 @@ const Result = ({ navigation }: MainStackProps<Routes.Result>) => {
         )}
       </AnimatedCircularProgress>
       <View style={styles.resultTextContainer}>
-        <Text style={styles.resultText}>You scrore</Text>
+        <Text style={styles.resultText}>Your score is</Text>
         <Text>
-          <Text style={styles.resultScore}>80</Text>
-          <Text style={styles.resultText}> / 80</Text>
+          <Text style={styles.resultScore}>{numOfCorrect}</Text>
+          <Text style={styles.resultText}> / {numOfQuestions}</Text>
         </Text>
       </View>
       <View style={styles.bottomButtonContainer}>

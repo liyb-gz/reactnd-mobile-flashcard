@@ -33,7 +33,11 @@ export type MainStackParamList = {
   [Routes.DeckList]: undefined;
   [Routes.DeckView]: { deck: Deck };
   [Routes.Quiz]: { questions: Question[] };
-  [Routes.Result]: undefined;
+  [Routes.Result]: {
+    percentage: number;
+    numOfCorrect: number;
+    numOfQuestions: number;
+  };
 };
 
 export type MainStackNavigationProp<
