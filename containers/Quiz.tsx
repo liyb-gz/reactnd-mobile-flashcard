@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { View, SafeAreaView, TouchableWithoutFeedback } from 'react-native';
 import styles from '../styles/styles';
-import ProgressBar from 'react-native-progress/Bar';
+import Progress from 'react-native-progress';
 import QuizCard from '../components/QuizCard';
 import { MainStackProps, Routes } from '../ts/navigation';
 import { tealBlue, lightgray } from '../styles/colors';
@@ -53,7 +53,7 @@ const Quiz = ({ navigation, route }: MainStackProps<Routes.Quiz>) => {
     <SafeAreaView style={[styles.screen, styles.container]}>
       <StatusBar style="light" />
       <View style={styles.container}>
-        <ProgressBar
+        <Progress.Bar
           progress={numOfCorrect / questions.length}
           width={null}
           height={10}
