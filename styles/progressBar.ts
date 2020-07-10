@@ -2,7 +2,7 @@ import { ViewStyle, TextStyle } from 'react-native';
 import { tealBlue } from './colors';
 
 export const progressBar: ViewStyle = {
-  marginBottom: 10,
+  marginVertical: 10,
 };
 
 export const circularProgress: ViewStyle = {

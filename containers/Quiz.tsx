@@ -4,7 +4,7 @@ import styles from '../styles/styles';
 import ProgressBar from 'react-native-progress/Bar';
 import QuizCard from '../components/QuizCard';
 import { MainStackProps, Routes } from '../ts/navigation';
-import { tealBlue } from '../styles/colors';
+import { tealBlue, lightgray } from '../styles/colors';
 import { StatusBar } from 'expo-status-bar';
 import FlipCard from 'react-native-flip-card';
 import { Button } from 'react-native-elements';
@@ -46,8 +46,11 @@ const Quiz = ({ navigation, route }: MainStackProps<Routes.Quiz>) => {
         <ProgressBar
           progress={numOfCorrect / questions.length}
           width={null}
+          height={10}
           style={styles.progressBar}
           color={tealBlue}
+          unfilledColor={lightgray}
+          borderWidth={0}
         />
         <TouchableWithoutFeedback onPress={handlePress}>
           <FlipCard
