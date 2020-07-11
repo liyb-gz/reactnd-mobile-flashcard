@@ -11,7 +11,8 @@ import { Button } from 'react-native-elements';
 import { fetchDecks } from '../redux/actions/decks';
 
 const FakeData: DeckState = {
-  Geography: {
+  '7ad35492-a137-5088-a4fa-7698ea739aa4': {
+    id: '7ad35492-a137-5088-a4fa-7698ea739aa4',
     title: 'Geography',
     questions: [
       {
@@ -57,7 +58,8 @@ const FakeData: DeckState = {
       },
     ],
   },
-  JavaScript: {
+  '87e318ae-8f1e-552c-9604-feb5de4aebc4': {
+    id: '87e318ae-8f1e-552c-9604-feb5de4aebc4',
     title: 'JavaScript',
     questions: [
       {
@@ -67,7 +69,8 @@ const FakeData: DeckState = {
       },
     ],
   },
-  Vue: {
+  '3d9e49a0-2c00-5cfc-a95d-11355a058aad': {
+    id: '3d9e49a0-2c00-5cfc-a95d-11355a058aad',
     title: 'Vue',
     questions: [],
   },

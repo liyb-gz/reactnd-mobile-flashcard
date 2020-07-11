@@ -4,12 +4,13 @@ export interface Question {
 }
 
 export interface Deck {
+  id: string;
   title: string;
   questions: Question[];
 }
 
 export interface DeckState {
-  [deckName: string]: Deck;
+  [deckId: string]: Deck;
 }
 
 export interface State {
@@ -27,6 +28,7 @@ export interface QuestionItemProps {
 
 export enum DeckActions {
   FetchDeck = 'FetchDeck',
+  AddDeck = 'AddDeck',
 }
 
 export interface FetchDecksAction {
@@ -34,7 +36,12 @@ export interface FetchDecksAction {
   decks: DeckState;
 }
 
-export type DeckActionTypes = FetchDecksAction;
+export interface AddDeckAction {
+  type: DeckActions.AddDeck;
+  deckName: string;
+}
+
+export type DeckActionTypes = FetchDecksAction | AddDeckAction;
 
 export type DeckReducer = (
   state: DeckState,
