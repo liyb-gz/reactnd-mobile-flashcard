@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useEffect, Dispatch } from 'react';
+import { connect, ConnectedProps } from 'react-redux';
 
 import { SafeAreaView, FlatList, View, Text } from 'react-native';
 
 import DeckCard from '../components/DeckCard';
-import { FlashCardData } from '../ts/interfaces';
+import { State, DeckState, DeckActionTypes } from '../ts/interfaces';
 import styles from '../styles/styles';
 import { MainStackProps, Routes } from '../ts/navigation';
 import { Button } from 'react-native-elements';
+import { fetchDecks } from '../redux/actions/decks';
 
-const FakeData: FlashCardData = {
-  React: {
-    title: 'React',
+const FakeData: DeckState = {
+  Geography: {
+    title: 'Geography',
     questions: [
       {
         questionText: 'What is the capital of Chile?',
@@ -71,39 +73,62 @@ const FakeData: FlashCardData = {
   },
 };
 
-const DeckList = ({ navigation }: MainStackProps<Routes.DeckList>) => {
+const DeckList = ({
+  navigation,
+  fetchDecks,
+  decks,
+}: MainStackProps<Routes.DeckList> & ConnectedProps<typeof connector>) => {
+  useEffect(() => {
+    fetchDecks();
+  }, []);
   return (
-    <SafeAreaView style={[styles.container, styles.screen]}>
-      {/* TODO: Add swipe action */}
-      <FlatList
-        data={Object.keys(FakeData)}
-        keyExtractor={(item) => FakeData[item].title}
-        renderItem={({ item }) => (
-          <DeckCard
-            deck={FakeData[item]}
-            onPress={() =>
-              navigation.navigate(Routes.DeckView, { deck: FakeData[item] })
-            }
-          />
-        )}
-        ListEmptyComponent={() => (
-          <View style={styles.listEmpty}>
-            <Text style={styles.listEmptyText}>Add a deck to get started</Text>
-          </View>
-        )}
-      />
-      <View style={styles.bottomButtonContainer}>
-        <Button
-          title="Add Deck"
-          buttonStyle={styles.tealBlueButton}
-          containerStyle={styles.buttomButton}
-          onPress={() => {
-            navigation.navigate(Routes.AddDeck);
-          }}
+    decks && (
+      <SafeAreaView style={[styles.container, styles.screen]}>
+        {/* TODO: Add swipe action */}
+        <FlatList
+          data={Object.keys(decks)}
+          keyExtractor={(deckName) => decks[deckName].title}
+          renderItem={({ item: deckName }) => (
+            <DeckCard
+              deck={decks[deckName]}
+              onPress={() =>
+                navigation.navigate(Routes.DeckView, { deck: decks[deckName] })
+              }
+            />
+          )}
+          ListEmptyComponent={() => (
+            <View style={styles.listEmpty}>
+              <Text style={styles.listEmptyText}>
+                Add a deck to get started
+              </Text>
+            </View>
+          )}
         />
-      </View>
-    </SafeAreaView>
+        <View style={styles.bottomButtonContainer}>
+          <Button
+            title="Add Deck"
+            buttonStyle={styles.tealBlueButton}
+            containerStyle={styles.buttomButton}
+            onPress={() => {
+              navigation.navigate(Routes.AddDeck);
+            }}
+          />
+        </View>
+      </SafeAreaView>
+    )
   );
 };
 
-export default DeckList;
+const mapStateToProps = (state: State) => ({
+  decks: state.decks,
+});
+
+const mapDispatchToProps = (dispatch: Dispatch<DeckActionTypes>) => {
+  return {
+    fetchDecks: () => dispatch(fetchDecks(FakeData)),
+  };
+};
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+export default connector(DeckList);

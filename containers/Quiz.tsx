@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { View, SafeAreaView, TouchableWithoutFeedback } from 'react-native';
 import styles from '../styles/styles';
-import Progress from 'react-native-progress';
+import * as Progress from 'react-native-progress';
 import QuizCard from '../components/QuizCard';
 import { MainStackProps, Routes } from '../ts/navigation';
 import { tealBlue, lightgray } from '../styles/colors';
@@ -34,6 +34,9 @@ const Quiz = ({ navigation, route }: MainStackProps<Routes.Quiz>) => {
     [numOfCorrect, currentIndex, hasFlipped, isFlipped, shouldShowResult]
   );
 
+  // Set state is asynchronous.
+  // If we navigate to result page right after setting numOfCorrect,
+  // numOfCorrect may be 1 less than it should be
   useEffect(() => {
     if (shouldShowResult) {
       navigation.replace(Routes.Result, {

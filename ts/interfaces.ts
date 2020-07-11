@@ -8,8 +8,12 @@ export interface Deck {
   questions: Question[];
 }
 
-export interface FlashCardData {
+export interface DeckState {
   [deckName: string]: Deck;
+}
+
+export interface State {
+  decks: DeckState;
 }
 
 export interface AddButtonProps {
@@ -20,3 +24,19 @@ export interface AddButtonProps {
 export interface QuestionItemProps {
   question: Question;
 }
+
+export enum DeckActions {
+  FetchDeck = 'FetchDeck',
+}
+
+export interface FetchDecksAction {
+  type: DeckActions.FetchDeck;
+  decks: DeckState;
+}
+
+export type DeckActionTypes = FetchDecksAction;
+
+export type DeckReducer = (
+  state: DeckState,
+  action: DeckActionTypes
+) => DeckState;
