@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SafeAreaView, View, Text } from 'react-native';
 import { Button } from 'react-native-elements';
 import styles from '../styles/styles';
@@ -8,10 +8,20 @@ import QuestionItem from '../components/QuestionItem';
 import { bottomButtonContainer } from '../styles/buttons';
 import { StatusBar } from 'expo-status-bar';
 import shuffle from 'lodash/shuffle';
+import { ConnectedProps, connect } from 'react-redux';
+import { State } from '../ts/interfaces';
 
-const DeckView = ({ navigation, route }: MainStackProps<Routes.DeckView>) => {
-  const { questions } = route.params.deck;
-
+const DeckView = ({
+  navigation,
+  questions,
+  title,
+  deckId,
+}: MainStackProps<Routes.DeckView> & ConnectedProps<typeof connector>) => {
+  useEffect(() => {
+    navigation.setOptions({
+      title,
+    });
+  }, []);
   return (
     <SafeAreaView style={styles.listContainer}>
       <StatusBar style="light" />
@@ -41,7 +51,7 @@ const DeckView = ({ navigation, route }: MainStackProps<Routes.DeckView>) => {
           buttonStyle={styles.tealBlueButton}
           containerStyle={styles.buttomButton}
           onPress={() => {
-            navigation.navigate(Routes.AddCard);
+            navigation.navigate(Routes.AddCard, { deckId });
           }}
         />
       </View>
@@ -49,4 +59,15 @@ const DeckView = ({ navigation, route }: MainStackProps<Routes.DeckView>) => {
   );
 };
 
-export default DeckView;
+const mapState = (state: State, { route }: MainStackProps<Routes.DeckView>) => {
+  const { deckId } = route.params;
+  return {
+    questions: state.decks[deckId].questions,
+    title: state.decks[deckId].title,
+    deckId,
+  };
+};
+
+const connector = connect(mapState);
+
+export default connector(DeckView);

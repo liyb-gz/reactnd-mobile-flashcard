@@ -1,12 +1,12 @@
-import React, { useCallback, useState, Dispatch } from 'react';
+import React, { useCallback, useState } from 'react';
 import { SafeAreaView, View } from 'react-native';
 import styles from '../styles/styles';
 import { Button, Input } from 'react-native-elements';
 import { tealBlue } from '../styles/colors';
 import { Routes, ModalStackProps } from '../ts/navigation';
 import { StatusBar } from 'expo-status-bar';
-import { State, DeckActionTypes } from '../ts/interfaces';
-import { addDeck } from '../redux/actions/decks';
+import { AddDeckThunkDispatch } from '../ts/interfaces';
+import { handleAddDeck } from '../redux/actions/decks';
 import { connect, ConnectedProps } from 'react-redux';
 
 const AddDeck = ({
@@ -16,7 +16,6 @@ const AddDeck = ({
   const [deckName, setDeckName] = useState('');
 
   const handleSubmit = useCallback(() => {
-    console.log('handleSubmit, deckName:', deckName);
     addDeck(deckName);
     navigation.goBack();
   }, [deckName]);
@@ -37,11 +36,10 @@ const AddDeck = ({
         />
       </View>
 
-      {/* TODO: submit button conditionally disabled*/}
-
       <View style={styles.bottomButtonContainer}>
         <Button
           title="Add Deck"
+          disabled={deckName.length === 0}
           buttonStyle={styles.tealBlueButton}
           containerStyle={styles.buttomButton}
           onPress={handleSubmit}
@@ -51,12 +49,12 @@ const AddDeck = ({
   );
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<DeckActionTypes>) => {
+const mapDispatch = (dispatch: AddDeckThunkDispatch) => {
   return {
-    addDeck: (deckName: string) => dispatch(addDeck(deckName)),
+    addDeck: (deckName: string) => dispatch(handleAddDeck(deckName)),
   };
 };
 
-const connector = connect(null, mapDispatchToProps);
+const connector = connect(null, mapDispatch);
 
 export default connector(AddDeck);

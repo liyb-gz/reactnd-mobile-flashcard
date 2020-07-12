@@ -1,14 +1,14 @@
-import React, { useEffect, Dispatch } from 'react';
+import React, { useEffect } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 
 import { SafeAreaView, FlatList, View, Text } from 'react-native';
 
 import DeckCard from '../components/DeckCard';
-import { State, DeckState, DeckActionTypes } from '../ts/interfaces';
+import { State, DeckState, FetchDecksThunkDispatch } from '../ts/interfaces';
 import styles from '../styles/styles';
 import { MainStackProps, Routes } from '../ts/navigation';
 import { Button } from 'react-native-elements';
-import { fetchDecks } from '../redux/actions/decks';
+import { handleFetchCard } from '../redux/actions/decks';
 
 const FakeData: DeckState = {
   '7ad35492-a137-5088-a4fa-7698ea739aa4': {
@@ -84,6 +84,7 @@ const DeckList = ({
   useEffect(() => {
     fetchDecks();
   }, []);
+  console.log('DeckList, decks: ', decks);
   return (
     decks && (
       <SafeAreaView style={[styles.container, styles.screen]}>
@@ -95,7 +96,9 @@ const DeckList = ({
             <DeckCard
               deck={decks[deckName]}
               onPress={() =>
-                navigation.navigate(Routes.DeckView, { deck: decks[deckName] })
+                navigation.navigate(Routes.DeckView, {
+                  deckId: decks[deckName].id,
+                })
               }
             />
           )}
@@ -122,16 +125,16 @@ const DeckList = ({
   );
 };
 
-const mapStateToProps = (state: State) => ({
+const mapState = (state: State) => ({
   decks: state.decks,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<DeckActionTypes>) => {
+const mapDispatch = (dispatch: FetchDecksThunkDispatch) => {
   return {
-    fetchDecks: () => dispatch(fetchDecks(FakeData)),
+    fetchDecks: () => dispatch(handleFetchCard()),
   };
 };
 
-const connector = connect(mapStateToProps, mapDispatchToProps);
+const connector = connect(mapState, mapDispatch);
 
 export default connector(DeckList);

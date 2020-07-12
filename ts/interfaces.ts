@@ -1,3 +1,5 @@
+import { ThunkAction, ThunkDispatch } from 'redux-thunk';
+
 export interface Question {
   questionText: string;
   answer: string;
@@ -29,6 +31,7 @@ export interface QuestionItemProps {
 export enum DeckActions {
   FetchDeck = 'FetchDeck',
   AddDeck = 'AddDeck',
+  AddCard = 'AddCard',
 }
 
 export interface FetchDecksAction {
@@ -41,7 +44,28 @@ export interface AddDeckAction {
   deckName: string;
 }
 
-export type DeckActionTypes = FetchDecksAction | AddDeckAction;
+export interface AddCardAction {
+  type: DeckActions.AddCard;
+  question: Question;
+  deckId: string;
+}
+
+export type FetchDecksThunk = ThunkAction<void, State, null, FetchDecksAction>;
+
+export type FetchDecksThunkDispatch = ThunkDispatch<
+  State,
+  null,
+  FetchDecksAction
+>;
+
+export type AddDeckThunk = ThunkAction<void, State, null, AddDeckAction>;
+export type AddDeckThunkDispatch = ThunkDispatch<State, null, AddDeckAction>;
+
+export type AddCardThunk = ThunkAction<void, State, null, AddCardAction>;
+export type AddCardThunkDispatch = ThunkDispatch<State, null, AddCardAction>;
+
+export type DeckActionTypes = FetchDecksAction | AddDeckAction | AddCardAction;
+export type DeckThunkTypes = FetchDecksThunk | AddDeckThunk | AddCardThunk;
 
 export type DeckReducer = (
   state: DeckState,

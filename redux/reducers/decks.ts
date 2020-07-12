@@ -21,6 +21,14 @@ const decks: DeckReducer = (state: DeckState = {}, action: DeckActionTypes) => {
           questions: [],
         },
       };
+    case DeckActions.AddCard:
+      return {
+        ...state,
+        [action.deckId]: {
+          ...state[action.deckId],
+          questions: [...state[action.deckId].questions, action.question],
+        },
+      };
     default:
       return state;
   }

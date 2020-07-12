@@ -29,8 +29,7 @@ const MainStack = () => {
       <Stack.Screen
         name={Routes.DeckView}
         component={DeckView}
-        options={({ route }) => ({
-          headerTitle: route.params.deck.title,
+        options={() => ({
           headerBackTitle: 'Home',
         })}
       />
