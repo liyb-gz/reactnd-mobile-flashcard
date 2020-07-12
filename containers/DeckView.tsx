@@ -43,7 +43,7 @@ const DeckView = ({
           buttonStyle={styles.tealBlueButton}
           containerStyle={styles.buttomButton}
           onPress={() => {
-            navigation.navigate(Routes.Quiz, { questions: shuffle(questions) });
+            navigation.navigate(Routes.Quiz, { deckId });
           }}
         />
         <Button

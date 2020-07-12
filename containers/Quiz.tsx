@@ -8,15 +8,20 @@ import { tealBlue, lightgray } from '../styles/colors';
 import { StatusBar } from 'expo-status-bar';
 import FlipCard from 'react-native-flip-card';
 import { Button } from 'react-native-elements';
+import { connect, ConnectedProps } from 'react-redux';
+import { State } from '../ts/interfaces';
+import shuffle from 'lodash/shuffle';
 
-const Quiz = ({ navigation, route }: MainStackProps<Routes.Quiz>) => {
+const Quiz = ({
+  navigation,
+  questions,
+  deckId,
+}: MainStackProps<Routes.Quiz> & ConnectedProps<typeof connector>) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [numOfCorrect, setNumOfCorrect] = useState(0);
   const [shouldShowResult, setShouldShowResult] = useState(false);
   const [isFlipped, setIsFlipped] = useState(false);
   const [hasFlipped, setHasFlipped] = useState(false);
-
-  const { questions } = route.params;
 
   const handleSubmit: (props: { correct: boolean }) => void = useCallback(
     ({ correct }) => {
@@ -40,6 +45,7 @@ const Quiz = ({ navigation, route }: MainStackProps<Routes.Quiz>) => {
   useEffect(() => {
     if (shouldShowResult) {
       navigation.replace(Routes.Result, {
+        deckId,
         percentage: (numOfCorrect / questions.length) * 100,
         numOfCorrect,
         numOfQuestions: questions.length,
@@ -105,4 +111,14 @@ const Quiz = ({ navigation, route }: MainStackProps<Routes.Quiz>) => {
   );
 };
 
-export default Quiz;
+const mapState = (state: State, { route }: MainStackProps<Routes.Quiz>) => {
+  const { deckId } = route.params;
+  return {
+    deckId,
+    questions: shuffle(state.decks[deckId].questions),
+  };
+};
+
+const connector = connect(mapState);
+
+export default connector(Quiz);

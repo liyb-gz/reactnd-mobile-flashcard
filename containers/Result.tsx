@@ -8,7 +8,7 @@ import { MainStackProps, Routes } from '../ts/navigation';
 
 const Result = ({ navigation, route }: MainStackProps<Routes.Result>) => {
   const screenWidth = Math.round(Dimensions.get('window').width);
-  const { percentage, numOfCorrect, numOfQuestions } = route.params;
+  const { percentage, numOfCorrect, numOfQuestions, deckId } = route.params;
   return (
     <SafeAreaView style={styles.container}>
       <AnimatedCircularProgress
@@ -35,6 +35,12 @@ const Result = ({ navigation, route }: MainStackProps<Routes.Result>) => {
         </Text>
       </View>
       <View style={styles.bottomButtonContainer}>
+        <Button
+          title="Redo"
+          buttonStyle={styles.tealBlueButton}
+          containerStyle={styles.buttomButton}
+          onPress={() => navigation.replace(Routes.Quiz, { deckId })}
+        />
         <Button
           title="Back to deck"
           buttonStyle={styles.tealBlueButton}

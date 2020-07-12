@@ -32,8 +32,9 @@ export type ModalStackProps<T extends keyof ModalStackParamList> = {
 export type MainStackParamList = {
   [Routes.DeckList]: undefined;
   [Routes.DeckView]: { deckId: string };
-  [Routes.Quiz]: { questions: Question[] };
+  [Routes.Quiz]: { deckId: string };
   [Routes.Result]: {
+    deckId: string;
     percentage: number;
     numOfCorrect: number;
     numOfQuestions: number;
