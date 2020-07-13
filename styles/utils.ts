@@ -57,6 +57,9 @@ export const keyboardAvoidingView: ViewStyle = {
 export const headerLeftIconSpacing: ViewStyle = {
   marginLeft: 15,
 };
+export const headerRightIconSpacing: ViewStyle = {
+  marginRight: 15,
+};
 
 export const bottom: ViewStyle = {
   position: 'absolute',
@@ -65,6 +68,10 @@ export const bottom: ViewStyle = {
 
 export const mutedText: TextStyle = {
   color: lightgray,
+};
+
+export const whiteText: TextStyle = {
+  color: white,
 };
 
 export const smallText: TextStyle = {

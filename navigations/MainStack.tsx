@@ -22,9 +22,9 @@ const MainStack = () => {
       <Stack.Screen
         name={Routes.DeckList}
         component={DeckList}
-        options={{
-          headerShown: false,
-        }}
+        options={() => ({
+          title: 'Home',
+        })}
       />
       <Stack.Screen
         name={Routes.DeckView}
