@@ -7,7 +7,6 @@ import { FlatList } from 'react-native-gesture-handler';
 import QuestionItem from '../components/QuestionItem';
 import { bottomButtonContainer } from '../styles/buttons';
 import { StatusBar } from 'expo-status-bar';
-import shuffle from 'lodash/shuffle';
 import { ConnectedProps, connect } from 'react-redux';
 import { State } from '../ts/interfaces';
 
@@ -19,16 +18,18 @@ const DeckView = ({
 }: MainStackProps<Routes.DeckView> & ConnectedProps<typeof connector>) => {
   useEffect(() => {
     navigation.setOptions({
-      title,
+      title: `${title} (${questions.length} card${
+        questions.length > 1 ? 's' : ''
+      })`,
     });
-  }, []);
+  }, [questions]);
   return (
     <SafeAreaView style={styles.listContainer}>
       <StatusBar style="light" />
       {/* TODO: Add swipe action */}
       <FlatList
         data={questions}
-        keyExtractor={(item) => item.questionText}
+        keyExtractor={(item) => item.id}
         renderItem={({ item }) => <QuestionItem question={item} />}
         ListEmptyComponent={() => (
           <View style={styles.listEmpty}>

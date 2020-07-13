@@ -25,7 +25,7 @@ const DeckList = ({
         {/* TODO: Add swipe action */}
         <FlatList
           data={Object.keys(decks)}
-          keyExtractor={(deckName) => decks[deckName].title}
+          keyExtractor={(deckName) => decks[deckName].id}
           renderItem={({ item: deckName }) => (
             <DeckCard
               deck={decks[deckName]}

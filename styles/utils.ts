@@ -1,5 +1,5 @@
-import { ViewStyle, Platform, StatusBar } from 'react-native';
-import { white } from './colors';
+import { ViewStyle, StatusBar, TextStyle } from 'react-native';
+import { white, lightgray } from './colors';
 
 export const shadow: ViewStyle = {
   shadowColor: '#000',
@@ -61,4 +61,12 @@ export const headerLeftIconSpacing: ViewStyle = {
 export const bottom: ViewStyle = {
   position: 'absolute',
   bottom: 20,
+};
+
+export const mutedText: TextStyle = {
+  color: lightgray,
+};
+
+export const smallText: TextStyle = {
+  fontSize: 14,
 };

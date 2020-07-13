@@ -12,21 +12,25 @@ const decks: DeckReducer = (state: DeckState = {}, action: DeckActionTypes) => {
     case DeckActions.FetchDeck:
       return action.decks;
     case DeckActions.AddDeck:
-      const id = ID();
+      const deckId = ID();
       return {
         ...state,
-        [id]: {
-          id,
+        [deckId]: {
+          id: deckId,
           title: action.deckName,
           questions: [],
         },
       };
     case DeckActions.AddCard:
+      const cardId = ID();
       return {
         ...state,
         [action.deckId]: {
           ...state[action.deckId],
-          questions: [...state[action.deckId].questions, action.question],
+          questions: [
+            ...state[action.deckId].questions,
+            { ...action.question, id: cardId },
+          ],
         },
       };
     default:

@@ -14,7 +14,9 @@ const DeckCard: FunctionComponent<{ deck: Deck; onPress: () => void }> = ({
     >
       {/* TODO: Add icon here */}
       <Text style={styles.deckCardTitle}>{deck.title}</Text>
-      <Text style={styles.deckCardText}>{deck.questions.length} cards</Text>
+      <Text style={styles.deckCardText}>
+        {deck.questions.length} card{deck.questions.length > 1 ? 's' : ''}
+      </Text>
     </TouchableOpacity>
   );
 };

@@ -1,6 +1,7 @@
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 
 export interface Question {
+  id: string;
   questionText: string;
   answer: string;
 }

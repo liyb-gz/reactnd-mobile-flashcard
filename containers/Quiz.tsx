@@ -1,5 +1,10 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { View, SafeAreaView, TouchableWithoutFeedback } from 'react-native';
+import {
+  View,
+  SafeAreaView,
+  TouchableWithoutFeedback,
+  Text,
+} from 'react-native';
 import styles from '../styles/styles';
 import * as Progress from 'react-native-progress';
 import QuizCard from '../components/QuizCard';
@@ -62,6 +67,9 @@ const Quiz = ({
     <SafeAreaView style={[styles.screen, styles.container]}>
       <StatusBar style="light" />
       <View style={styles.container}>
+        <Text style={styles.smallText}>
+          {numOfCorrect} correct, {questions.length - currentIndex - 1} upcoming
+        </Text>
         <Progress.Bar
           progress={numOfCorrect / questions.length}
           width={null}
