@@ -29,7 +29,6 @@ const AddDeck = ({
           leftIcon={{ name: 'book', color: tealBlue }}
           inputContainerStyle={styles.addDeckTextInputContainer}
           inputStyle={styles.addDeckTextInput}
-          onSubmitEditing={handleSubmit}
           value={deckName}
           onChangeText={setDeckName}
           autoFocus={true}

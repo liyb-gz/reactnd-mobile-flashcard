@@ -54,7 +54,6 @@ const AddCard = ({
           leftIcon={{ name: 'comment', color: tealBlue }}
           inputContainerStyle={styles.addCardTextInputContainer}
           inputStyle={styles.addCardTextInput}
-          onSubmitEditing={handleSubmit}
           ref={answerInput}
         />
       </View>
