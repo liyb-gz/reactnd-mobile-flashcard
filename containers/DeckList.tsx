@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 
 import {
@@ -21,6 +21,7 @@ import * as Notifications from 'expo-notifications';
 import { PermissionStatus } from 'expo-permissions';
 import useAppState from 'react-native-appstate-hook';
 import { NotificationRequestInput } from 'expo-notifications';
+import { showMessage, MessageOptions } from 'react-native-flash-message';
 
 const notification: NotificationRequestInput = {
   content: {
@@ -33,6 +34,24 @@ const notification: NotificationRequestInput = {
     hour: 20,
     minute: 0,
     repeats: true,
+  },
+};
+
+const notificationFlashMessages: { [messageName: string]: MessageOptions } = {
+  on: {
+    message: 'Notification is turned on!',
+    description: 'You will be notified everyday at 8:00 P.M.',
+    type: 'success',
+  },
+  denied: {
+    message: 'Notification permission denied ☹️',
+    description: 'We need your permission to notify you.',
+    type: 'danger',
+  },
+  off: {
+    message: 'Notification is turned off.',
+    description: 'You will no long receive notifications.',
+    type: 'warning',
   },
 };
 
@@ -83,13 +102,13 @@ const DeckList = ({
 
   const cancelAllNotifications = useCallback(async () => {
     await Notifications.cancelAllScheduledNotificationsAsync();
-    // TODO: Display flash message
+    showMessage(notificationFlashMessages.off);
     setShouldUpdateStatus(true);
   }, []);
 
   const scheduleNotification = useCallback(async () => {
     await Notifications.scheduleNotificationAsync(notification);
-    // TODO: Display flash message
+    showMessage(notificationFlashMessages.on);
     setShouldUpdateStatus(true);
   }, []);
 
@@ -111,7 +130,7 @@ const DeckList = ({
         if (status === PermissionStatus.GRANTED) {
           scheduleNotification();
         } else {
-          // TODO: Display DENIED flash message
+          showMessage(notificationFlashMessages.denied);
         }
         break;
 

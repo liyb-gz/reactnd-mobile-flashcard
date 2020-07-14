@@ -10,7 +10,8 @@ import { createStore } from 'redux';
 import reducer from './redux/reducers';
 import middleware from './redux/middleware';
 
-// TODO: Add middleware
+import FlashMessage from 'react-native-flash-message';
+
 const store = createStore(reducer, middleware);
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
         <NavigationContainer>
           <ModalStack />
         </NavigationContainer>
+        <FlashMessage position="top" />
       </SafeAreaProvider>
     </Provider>
   );
