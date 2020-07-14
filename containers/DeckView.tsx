@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
-import { SafeAreaView, View, Text } from 'react-native';
+import { SafeAreaView, View, Text, TouchableOpacity } from 'react-native';
 import { Button } from 'react-native-elements';
 import styles from '../styles/styles';
 import { MainStackProps, Routes } from '../ts/navigation';
-import { FlatList } from 'react-native-gesture-handler';
 import QuestionItem from '../components/QuestionItem';
 import { bottomButtonContainer } from '../styles/buttons';
 import { StatusBar } from 'expo-status-bar';
 import { ConnectedProps, connect } from 'react-redux';
 import { State } from '../ts/interfaces';
+import { SwipeListView } from 'react-native-swipe-list-view';
 
 const DeckView = ({
   navigation,
@@ -23,19 +23,36 @@ const DeckView = ({
       })`,
     });
   }, [questions]);
+
   return (
     <SafeAreaView style={styles.listContainer}>
       <StatusBar style="light" />
       {/* TODO: Add swipe action */}
-      <FlatList
+      <SwipeListView
         data={questions}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <QuestionItem question={item} />}
+        renderItem={({ item }) => (
+          <QuestionItem question={item} style={styles.listRowFront} />
+        )}
         ListEmptyComponent={() => (
           <View style={styles.listEmpty}>
             <Text style={styles.listEmptyText}>Add a card to get started</Text>
           </View>
         )}
+        renderHiddenItem={() => (
+          <View style={styles.listRowBack}>
+            <TouchableOpacity
+              style={[styles.listBackRightBtn]}
+              onPress={() => console.log('right 2')}
+            >
+              <Text style={styles.listBackTextWhite}>Delete</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+        disableRightSwipe={true}
+        rightOpenValue={-100}
+        stopRightSwipe={-150}
+        useNativeDriver={true}
       />
       <View style={bottomButtonContainer}>
         <Button

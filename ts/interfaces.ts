@@ -1,4 +1,5 @@
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
+import { ViewStyle } from 'react-native';
 
 export interface QuestionInput {
   questionText: string;
@@ -31,6 +32,7 @@ export interface AddButtonProps {
 
 export interface QuestionItemProps {
   question: Question;
+  style?: ViewStyle;
 }
 
 export enum DeckActions {
