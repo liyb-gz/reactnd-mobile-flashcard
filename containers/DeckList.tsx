@@ -20,6 +20,21 @@ import { handleFetchCard } from '../redux/actions/decks';
 import * as Notifications from 'expo-notifications';
 import { PermissionStatus } from 'expo-permissions';
 import useAppState from 'react-native-appstate-hook';
+import { NotificationRequestInput } from 'expo-notifications';
+
+const notification: NotificationRequestInput = {
+  content: {
+    title: 'Daily Reminder',
+    body: 'Remember to work on your flashcards!',
+    sound: true,
+    autoDismiss: false,
+  },
+  trigger: {
+    hour: 20,
+    minute: 0,
+    repeats: true,
+  },
+};
 
 const getNotificationIconString = (
   status: PermissionStatus,
@@ -55,14 +70,27 @@ const DeckList = ({
   const [notifIconString, setNotifIconString] = useState('notifications');
   const [shouldUpdateStatus, setShouldUpdateStatus] = useState(false);
 
+  // Update the states based on notification status
   const getNotificationStatus = useCallback(async () => {
     const { status } = await Notifications.getPermissionsAsync();
     setNotificationStatus(status);
 
-    if (status === 'granted') {
+    if (status === PermissionStatus.GRANTED) {
       const scheduledNotifications = await Notifications.getAllScheduledNotificationsAsync();
       setHasScheduledNotifications(scheduledNotifications.length > 0);
     }
+  }, []);
+
+  const cancelAllNotifications = useCallback(async () => {
+    await Notifications.cancelAllScheduledNotificationsAsync();
+    // TODO: Display flash message
+    setShouldUpdateStatus(true);
+  }, []);
+
+  const scheduleNotification = useCallback(async () => {
+    await Notifications.scheduleNotificationAsync(notification);
+    // TODO: Display flash message
+    setShouldUpdateStatus(true);
   }, []);
 
   const handleNotificationPress = useCallback(async () => {
@@ -79,33 +107,19 @@ const DeckList = ({
         break;
 
       case PermissionStatus.UNDETERMINED:
-        await Notifications.requestPermissionsAsync();
-        console.log('Finished requesting permissions');
+        const { status } = await Notifications.requestPermissionsAsync();
+        if (status === PermissionStatus.GRANTED) {
+          scheduleNotification();
+        } else {
+          // TODO: Display DENIED flash message
+        }
+        break;
 
       case PermissionStatus.GRANTED:
         if (hasScheduledNotifications) {
-          await Notifications.cancelAllScheduledNotificationsAsync();
-          setShouldUpdateStatus(true);
-          console.log('Notification cleared');
+          cancelAllNotifications();
         } else {
-          const notifId = await Notifications.scheduleNotificationAsync({
-            content: {
-              title: 'Daily Reminder',
-              body: 'Remember to work on your flashcards!',
-              sound: true,
-              autoDismiss: false,
-            },
-            trigger: {
-              hour: 9,
-              minute: 0,
-              repeats: true,
-            },
-          });
-          console.log('Notification set');
-          console.log(notifId);
-          setShouldUpdateStatus(true);
-          const notifList = await Notifications.getAllScheduledNotificationsAsync();
-          console.log(notifList);
+          scheduleNotification();
         }
     }
   }, [notificationStatus, hasScheduledNotifications]);
