@@ -11,19 +11,22 @@ import reducer from './redux/reducers';
 import middleware from './redux/middleware';
 
 import FlashMessage from 'react-native-flash-message';
+import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 
 const store = createStore(reducer, middleware);
 
 const App = () => {
   return (
     <Provider store={store}>
-      <SafeAreaProvider>
-        <StatusBar style="auto" />
-        <NavigationContainer>
-          <ModalStack />
-        </NavigationContainer>
-        <FlashMessage position="top" />
-      </SafeAreaProvider>
+      <ActionSheetProvider>
+        <SafeAreaProvider>
+          <StatusBar style="auto" />
+          <NavigationContainer>
+            <ModalStack />
+          </NavigationContainer>
+          <FlashMessage position="top" />
+        </SafeAreaProvider>
+      </ActionSheetProvider>
     </Provider>
   );
 };

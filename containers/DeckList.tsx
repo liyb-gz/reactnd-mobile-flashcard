@@ -22,6 +22,7 @@ import { PermissionStatus } from 'expo-permissions';
 import useAppState from 'react-native-appstate-hook';
 import { NotificationRequestInput } from 'expo-notifications';
 import { showMessage, MessageOptions } from 'react-native-flash-message';
+import { useActionSheet } from '@expo/react-native-action-sheet';
 
 const notification: NotificationRequestInput = {
   content: {
@@ -80,6 +81,8 @@ const DeckList = ({
   decks,
 }: MainStackProps<Routes.DeckList> & ConnectedProps<typeof connector>) => {
   const { appState } = useAppState();
+  const { showActionSheetWithOptions } = useActionSheet();
+
   const [notificationStatus, setNotificationStatus] = useState<
     PermissionStatus
   >(PermissionStatus.UNDETERMINED);
@@ -187,15 +190,35 @@ const DeckList = ({
         {/* TODO: Add swipe action */}
         <FlatList
           data={Object.keys(decks)}
-          keyExtractor={(deckName) => decks[deckName].id}
-          renderItem={({ item: deckName }) => (
+          keyExtractor={(deckId) => deckId}
+          renderItem={({ item: deckId }) => (
             <DeckCard
-              deck={decks[deckName]}
+              deck={decks[deckId]}
               onPress={() =>
                 navigation.navigate(Routes.DeckView, {
-                  deckId: decks[deckName].id,
+                  deckId,
                 })
               }
+              onLongPress={() => {
+                showActionSheetWithOptions(
+                  {
+                    title: 'Choose an action',
+                    options: ['Delete Deck', 'Edit Deck', 'Cancel'],
+                    destructiveButtonIndex: 0,
+                    cancelButtonIndex: 2,
+                  },
+                  (i) => {
+                    switch (i) {
+                      case 0:
+                        console.log('Delete deck: ', deckId);
+                        break;
+                      case 1:
+                        console.log('Edit deck: ', deckId);
+                        break;
+                    }
+                  }
+                );
+              }}
             />
           )}
           ListEmptyComponent={() => (

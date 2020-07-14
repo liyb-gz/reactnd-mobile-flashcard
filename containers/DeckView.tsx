@@ -32,18 +32,24 @@ const DeckView = ({
         data={questions}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <QuestionItem question={item} style={styles.listRowFront} />
+          <QuestionItem
+            question={item}
+            style={styles.listRowFront}
+            onPress={() => {
+              console.log('Edit card', deckId, item.id);
+            }}
+          />
         )}
         ListEmptyComponent={() => (
           <View style={styles.listEmpty}>
             <Text style={styles.listEmptyText}>Add a card to get started</Text>
           </View>
         )}
-        renderHiddenItem={() => (
+        renderHiddenItem={({ item }) => (
           <View style={styles.listRowBack}>
             <TouchableOpacity
               style={[styles.listBackRightBtn]}
-              onPress={() => console.log('right 2')}
+              onPress={() => console.log('delete card: ', deckId, item)}
             >
               <Text style={styles.listBackTextWhite}>Delete</Text>
             </TouchableOpacity>

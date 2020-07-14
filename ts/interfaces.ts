@@ -33,6 +33,7 @@ export interface AddButtonProps {
 export interface QuestionItemProps {
   question: Question;
   style?: ViewStyle;
+  onPress?: () => void;
 }
 
 export enum DeckActions {
