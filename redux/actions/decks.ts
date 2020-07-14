@@ -9,12 +9,14 @@ import {
   AddDeckThunk,
   AddCardThunk,
   FetchDecksThunk,
+  QuestionInput,
 } from '../../ts/interfaces';
 
 import { Dispatch } from 'react';
 
 import AsyncStorage from '@react-native-community/async-storage';
-import { ThunkAction, ThunkDispatch } from 'redux-thunk';
+import { ThunkDispatch } from 'redux-thunk';
+import ID from '../../utils/ID';
 
 export const fetchDecks: (decks: DeckState) => FetchDecksAction = (decks) => ({
   type: DeckActions.FetchDeck,
@@ -53,12 +55,16 @@ export const handleAddDeck = (deckName: string): AddDeckThunk => (
 };
 
 export const handleAddCard = (
-  question: Question,
+  questionInput: QuestionInput,
   deckId: string
 ): AddCardThunk => (
   dispatch: Dispatch<AddCardAction>,
   getState: () => State
 ) => {
+  const question: Question = {
+    ...questionInput,
+    id: ID(),
+  };
   dispatch(addCard(question, deckId));
   const state = getState();
   AsyncStorage.setItem(StorageKeys.Deck, JSON.stringify(state.decks)).catch(

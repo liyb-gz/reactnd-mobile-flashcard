@@ -6,7 +6,7 @@ import { Routes, ModalStackProps } from '../ts/navigation';
 import { tealBlue } from '../styles/colors';
 import { StatusBar } from 'expo-status-bar';
 import { ConnectedProps, connect } from 'react-redux';
-import { Question, AddCardThunkDispatch } from '../ts/interfaces';
+import { AddCardThunkDispatch, QuestionInput } from '../ts/interfaces';
 import { handleAddCard } from '../redux/actions/decks';
 
 const AddCard = ({
@@ -72,7 +72,7 @@ const AddCard = ({
 };
 
 const mapDispatch = (dispatch: AddCardThunkDispatch) => ({
-  addCard: (question: Question, deckId: string) => {
+  addCard: (question: QuestionInput, deckId: string) => {
     dispatch(handleAddCard(question, deckId));
   },
 });

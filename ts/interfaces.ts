@@ -1,5 +1,9 @@
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 
+export interface QuestionInput {
+  questionText: string;
+  answer: string;
+}
 export interface Question {
   id: string;
   questionText: string;
