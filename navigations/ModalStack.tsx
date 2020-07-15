@@ -39,22 +39,8 @@ const ModalStack = () => {
           headerShown: false,
         }}
       />
-      <Stack.Screen
-        name={Routes.AddDeck}
-        component={AddDeck}
-        options={({ navigation }) => ({
-          title: 'Add a new deck',
-        })}
-      />
-      <Stack.Screen
-        name={Routes.AddCard}
-        component={AddCard}
-        options={({ navigation }) => {
-          return {
-            title: 'Add a new card',
-          };
-        }}
-      />
+      <Stack.Screen name={Routes.AddDeck} component={AddDeck} />
+      <Stack.Screen name={Routes.AddCard} component={AddCard} />
     </Stack.Navigator>
   );
 };

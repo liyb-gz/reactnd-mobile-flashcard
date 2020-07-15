@@ -14,6 +14,9 @@ const AddCard = ({
   route,
   addCard,
 }: ModalStackProps<Routes.AddCard> & ConnectedProps<typeof connector>) => {
+  navigation.setOptions({
+    title: 'Add a new card',
+  });
   const answerInput = createRef<Input>();
 
   const [questionText, setQuestionText] = useState('');

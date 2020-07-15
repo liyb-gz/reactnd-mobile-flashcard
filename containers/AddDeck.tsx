@@ -26,6 +26,9 @@ const AddDeck = ({
   addDeck,
   editDeck,
 }: ModalStackProps<Routes.AddDeck> & ConnectedProps<typeof connector>) => {
+  navigation.setOptions({
+    title: isEdit ? 'Edit deck' : 'Add a new deck',
+  });
   const [deckName, setDeckName] = useState(initialDeckName);
 
   const handleSubmit = useCallback(() => {
@@ -54,7 +57,7 @@ const AddDeck = ({
 
       <View style={styles.bottomButtonContainer}>
         <Button
-          title="Add Deck"
+          title={isEdit ? 'Save' : 'Add Deck'}
           disabled={deckName.length === 0}
           buttonStyle={styles.tealBlueButton}
           containerStyle={styles.buttomButton}
