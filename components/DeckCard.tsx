@@ -8,6 +8,7 @@ const DeckCard: FunctionComponent<{
   onPress: () => void;
   onLongPress: () => void;
 }> = ({ deck, onPress, onLongPress }) => {
+  const numOfQuestions = Object.keys(deck.questions).length;
   return (
     <TouchableOpacity
       style={[styles.deckCard, styles.shadow]}
@@ -17,7 +18,7 @@ const DeckCard: FunctionComponent<{
       {/* TODO: Add icon here */}
       <Text style={styles.deckCardTitle}>{deck.title}</Text>
       <Text style={styles.deckCardText}>
-        {deck.questions.length} card{deck.questions.length > 1 ? 's' : ''}
+        {numOfQuestions} card{numOfQuestions > 1 ? 's' : ''}
       </Text>
     </TouchableOpacity>
   );

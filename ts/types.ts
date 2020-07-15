@@ -14,7 +14,11 @@ export interface Question {
 export interface Deck {
   id: string;
   title: string;
-  questions: Question[];
+  questions: QuestionBank;
+}
+
+export interface QuestionBank {
+  [questionId: string]: Question;
 }
 
 export interface DeckState {

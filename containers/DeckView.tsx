@@ -17,9 +17,11 @@ const DeckView = ({
   deckId,
 }: MainStackProps<Routes.DeckView> & ConnectedProps<typeof connector>) => {
   useEffect(() => {
+    const numOfQuestions = Object.keys(questions).length;
+
     navigation.setOptions({
-      title: `${title} (${questions.length} card${
-        questions.length > 1 ? 's' : ''
+      title: `${title} (${numOfQuestions} card${
+        numOfQuestions > 1 ? 's' : ''
       })`,
     });
   }, [questions]);
@@ -29,14 +31,14 @@ const DeckView = ({
       <StatusBar style="light" />
       {/* TODO: Add swipe action */}
       <SwipeListView
-        data={questions}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
+        data={Object.keys(questions)}
+        keyExtractor={(item) => item}
+        renderItem={({ item: questionId }) => (
           <QuestionItem
-            question={item}
+            question={questions[questionId]}
             style={styles.listRowFront}
             onPress={() => {
-              console.log('Edit card', deckId, item.id);
+              console.log('Edit card', deckId, questionId);
             }}
           />
         )}
@@ -63,7 +65,7 @@ const DeckView = ({
       <View style={bottomButtonContainer}>
         <Button
           title="Start Quiz"
-          disabled={questions.length === 0}
+          disabled={Object.keys(questions).length === 0}
           buttonStyle={styles.tealBlueButton}
           containerStyle={styles.buttomButton}
           onPress={() => {
