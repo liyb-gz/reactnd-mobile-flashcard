@@ -29,7 +29,6 @@ const DeckView = ({
   return (
     <SafeAreaView style={styles.listContainer}>
       <StatusBar style="light" />
-      {/* TODO: Add swipe action */}
       <SwipeListView
         data={Object.keys(questions)}
         keyExtractor={(item) => item}

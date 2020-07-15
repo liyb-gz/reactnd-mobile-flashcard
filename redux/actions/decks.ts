@@ -91,6 +91,22 @@ export const handleAddDeck = (
   );
 };
 
+export const handleEditDeck = (
+  deckName: string,
+  deckId: string
+): ThunkOfAction<EditDeckAction> => (
+  dispatch: DispatchOfAction<EditDeckAction>,
+  getState: () => State
+) => {
+  dispatch(editDeck(deckName, deckId));
+  const state = getState();
+  AsyncStorage.setItem(StorageKeys.Deck, JSON.stringify(state.decks)).catch(
+    (error) => {
+      console.error('Error: ', error);
+    }
+  );
+};
+
 export const handleDeleteDeck = (
   deckId: string
 ): ThunkOfAction<DeleteDeckAction> => (

@@ -216,11 +216,13 @@ const DeckList = ({
                   (index) => {
                     switch (index) {
                       case 0:
-                        console.log('Delete deck: ', deckId);
                         deleteDeck(deckId);
                         break;
                       case 1:
-                        console.log('Edit deck: ', deckId);
+                        navigation.navigate(Routes.AddDeck, {
+                          isEdit: true,
+                          deckId,
+                        });
                         break;
                     }
                   }

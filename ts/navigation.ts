@@ -14,8 +14,10 @@ export enum Routes {
 
 export type ModalStackParamList = {
   [Routes.MainStack]: undefined;
-  [Routes.AddDeck]: undefined;
-  [Routes.AddCard]: { deckId: string };
+  [Routes.AddDeck]: { isEdit: true; deckId: string } | undefined;
+  [Routes.AddCard]:
+    | { isEdit: true; deckId: string; questionId: string }
+    | { deckId: string };
 };
 
 export type ModalStackNavigationProp = StackNavigationProp<ModalStackParamList>;
