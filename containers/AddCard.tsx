@@ -6,27 +6,41 @@ import { Routes, ModalStackProps } from '../ts/navigation';
 import { tealBlue } from '../styles/colors';
 import { StatusBar } from 'expo-status-bar';
 import { ConnectedProps, connect } from 'react-redux';
-import { AddCardThunkDispatch, QuestionInput } from '../ts/types';
-import { handleAddCard } from '../redux/actions/decks';
+import {
+  DispatchOfAction,
+  AddCardAction,
+  QuestionInput,
+  Question,
+  State,
+  EditCardAction,
+} from '../ts/types';
+import { handleAddCard, handleEditCard } from '../redux/actions/decks';
 
 const AddCard = ({
+  isEdit,
+  initialQuestionText,
+  initialAnswer,
+  questionId,
+  deckId,
   navigation,
-  route,
   addCard,
+  editCard,
 }: ModalStackProps<Routes.AddCard> & ConnectedProps<typeof connector>) => {
   navigation.setOptions({
-    title: 'Add a new card',
+    title: isEdit ? 'Edit card' : 'Add a new card',
   });
+
   const answerInput = createRef<Input>();
 
-  const [questionText, setQuestionText] = useState('');
-  const [answer, setAnswer] = useState('');
-
-  const { deckId } = route.params;
+  const [questionText, setQuestionText] = useState(initialQuestionText);
+  const [answer, setAnswer] = useState(initialAnswer);
 
   const handleSubmit = useCallback(() => {
-    console.log('handleSubmit. Question: ', questionText, 'Answer: ', answer);
-    addCard({ questionText, answer }, deckId);
+    if (isEdit && questionId) {
+      editCard({ questionText, answer, id: questionId }, deckId);
+    } else {
+      addCard({ questionText, answer }, deckId);
+    }
     navigation.goBack();
   }, [questionText, answer, deckId]);
 
@@ -63,7 +77,7 @@ const AddCard = ({
 
       <View style={styles.bottomButtonContainer}>
         <Button
-          title="Add Deck"
+          title={isEdit ? 'Save' : 'Add Deck'}
           disabled={questionText.length === 0 || answer.length === 0}
           buttonStyle={styles.tealBlueButton}
           containerStyle={styles.buttomButton}
@@ -74,12 +88,45 @@ const AddCard = ({
   );
 };
 
-const mapDispatch = (dispatch: AddCardThunkDispatch) => ({
+const mapState = (state: State, { route }: ModalStackProps<Routes.AddCard>) => {
+  const { deckId } = route.params;
+
+  let initialQuestionText = '';
+  let initialAnswer = '';
+  let questionId: string | null = null;
+
+  if ('questionId' in route.params) {
+    questionId = route.params.questionId;
+    initialAnswer = state.decks[deckId].questions[questionId].answer;
+    initialQuestionText =
+      state.decks[deckId].questions[questionId].questionText;
+  }
+
+  let isEdit = false;
+  if ('isEdit' in route.params) {
+    isEdit = route.params.isEdit;
+  }
+
+  return {
+    isEdit,
+    deckId,
+    questionId,
+    initialQuestionText,
+    initialAnswer,
+  };
+};
+
+const mapDispatch = (
+  dispatch: DispatchOfAction<AddCardAction | EditCardAction>
+) => ({
   addCard: (question: QuestionInput, deckId: string) => {
     dispatch(handleAddCard(question, deckId));
   },
+  editCard: (question: Question, deckId: string) => {
+    dispatch(handleEditCard(question, deckId));
+  },
 });
 
-const connector = connect(null, mapDispatch);
+const connector = connect(mapState, mapDispatch);
 
 export default connector(AddCard);

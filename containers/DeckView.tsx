@@ -37,7 +37,11 @@ const DeckView = ({
             question={questions[questionId]}
             style={styles.listRowFront}
             onPress={() => {
-              console.log('Edit card', deckId, questionId);
+              navigation.navigate(Routes.AddCard, {
+                isEdit: true,
+                deckId,
+                questionId,
+              });
             }}
           />
         )}

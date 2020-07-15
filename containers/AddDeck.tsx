@@ -3,11 +3,7 @@ import { SafeAreaView, View } from 'react-native';
 import styles from '../styles/styles';
 import { Button, Input } from 'react-native-elements';
 import { tealBlue } from '../styles/colors';
-import {
-  Routes,
-  ModalStackProps,
-  ModalStackNavigationProp,
-} from '../ts/navigation';
+import { Routes, ModalStackProps } from '../ts/navigation';
 import { StatusBar } from 'expo-status-bar';
 import {
   DispatchOfAction,

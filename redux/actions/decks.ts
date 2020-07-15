@@ -76,6 +76,14 @@ enum StorageKeys {
   Deck = 'DECK',
 }
 
+const saveStateToAsyncStorage = (state: State) => {
+  AsyncStorage.setItem(StorageKeys.Deck, JSON.stringify(state.decks)).catch(
+    (error) => {
+      console.error('Error: ', error);
+    }
+  );
+};
+
 export const handleAddDeck = (
   deckName: string
 ): ThunkOfAction<AddDeckAction> => (
@@ -83,12 +91,7 @@ export const handleAddDeck = (
   getState: () => State
 ) => {
   dispatch(addDeck(deckName));
-  const state = getState();
-  AsyncStorage.setItem(StorageKeys.Deck, JSON.stringify(state.decks)).catch(
-    (error) => {
-      console.error('Error: ', error);
-    }
-  );
+  saveStateToAsyncStorage(getState());
 };
 
 export const handleEditDeck = (
@@ -99,12 +102,7 @@ export const handleEditDeck = (
   getState: () => State
 ) => {
   dispatch(editDeck(deckName, deckId));
-  const state = getState();
-  AsyncStorage.setItem(StorageKeys.Deck, JSON.stringify(state.decks)).catch(
-    (error) => {
-      console.error('Error: ', error);
-    }
-  );
+  saveStateToAsyncStorage(getState());
 };
 
 export const handleDeleteDeck = (
@@ -114,12 +112,7 @@ export const handleDeleteDeck = (
   getState: () => State
 ) => {
   dispatch(deleteDeck(deckId));
-  const state = getState();
-  AsyncStorage.setItem(StorageKeys.Deck, JSON.stringify(state.decks)).catch(
-    (error) => {
-      console.error('Error: ', error);
-    }
-  );
+  saveStateToAsyncStorage(getState());
 };
 
 export const handleAddCard = (
@@ -134,12 +127,18 @@ export const handleAddCard = (
     id: ID(),
   };
   dispatch(addCard(question, deckId));
-  const state = getState();
-  AsyncStorage.setItem(StorageKeys.Deck, JSON.stringify(state.decks)).catch(
-    (error) => {
-      console.error('Error: ', error);
-    }
-  );
+  saveStateToAsyncStorage(getState());
+};
+
+export const handleEditCard = (
+  question: Question,
+  deckId: string
+): ThunkOfAction<EditCardAction> => (
+  dispatch: Dispatch<EditCardAction>,
+  getState: () => State
+) => {
+  dispatch(editCard(question, deckId));
+  saveStateToAsyncStorage(getState());
 };
 
 export const handleFetchDecks = (): ThunkOfAction<FetchDecksAction> => (
