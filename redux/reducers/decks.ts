@@ -3,7 +3,7 @@ import {
   DeckReducer,
   DeckState,
   DeckActions,
-} from '../../ts/interfaces';
+} from '../../ts/types';
 
 import ID from '../../utils/ID';
 

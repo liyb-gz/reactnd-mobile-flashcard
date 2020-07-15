@@ -39,7 +39,11 @@ export interface QuestionItemProps {
 export enum DeckActions {
   FetchDeck = 'FetchDeck',
   AddDeck = 'AddDeck',
+  EditDeck = 'EditDeck',
+  DeleteDeck = 'DeleteDeck',
   AddCard = 'AddCard',
+  EditCard = 'EditCard',
+  DeleteCard = 'DeleteCard',
 }
 
 export interface FetchDecksAction {
@@ -52,28 +56,55 @@ export interface AddDeckAction {
   deckName: string;
 }
 
+export interface EditDeckAction {
+  type: DeckActions.EditDeck;
+  deckName: string;
+  deckId: string;
+}
+
+export interface DeleteDeckAction {
+  type: DeckActions.DeleteDeck;
+  deckId: string;
+}
+
 export interface AddCardAction {
   type: DeckActions.AddCard;
   question: Question;
   deckId: string;
 }
 
-export type FetchDecksThunk = ThunkAction<void, State, null, FetchDecksAction>;
+export interface EditCardAction {
+  type: DeckActions.EditCard;
+  question: Question;
+  deckId: string;
+}
 
-export type FetchDecksThunkDispatch = ThunkDispatch<
+export interface DeleteCardAction {
+  type: DeckActions.DeleteCard;
+  questionId: string;
+  deckId: string;
+}
+
+export type DeckActionTypes =
+  | FetchDecksAction
+  | AddDeckAction
+  | EditDeckAction
+  | DeleteDeckAction
+  | AddCardAction
+  | EditCardAction
+  | DeleteCardAction;
+
+export type ThunkOfAction<T extends DeckActionTypes> = ThunkAction<
+  void,
   State,
   null,
-  FetchDecksAction
+  T
 >;
-
-export type AddDeckThunk = ThunkAction<void, State, null, AddDeckAction>;
-export type AddDeckThunkDispatch = ThunkDispatch<State, null, AddDeckAction>;
-
-export type AddCardThunk = ThunkAction<void, State, null, AddCardAction>;
-export type AddCardThunkDispatch = ThunkDispatch<State, null, AddCardAction>;
-
-export type DeckActionTypes = FetchDecksAction | AddDeckAction | AddCardAction;
-export type DeckThunkTypes = FetchDecksThunk | AddDeckThunk | AddCardThunk;
+export type DispatchOfAction<T extends DeckActionTypes> = ThunkDispatch<
+  State,
+  null,
+  T
+>;
 
 export type DeckReducer = (
   state: DeckState,

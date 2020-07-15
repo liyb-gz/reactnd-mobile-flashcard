@@ -14,7 +14,7 @@ import { StatusBar } from 'expo-status-bar';
 import FlipCard from 'react-native-flip-card';
 import { Button } from 'react-native-elements';
 import { connect, ConnectedProps } from 'react-redux';
-import { State } from '../ts/interfaces';
+import { State } from '../ts/types';
 import shuffle from 'lodash/shuffle';
 
 const Quiz = ({

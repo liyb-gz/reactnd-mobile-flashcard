@@ -1,16 +1,18 @@
 import {
-  FetchDecksAction,
   DeckActions,
   DeckState,
-  AddDeckAction,
-  Question,
-  AddCardAction,
   State,
-  AddDeckThunk,
-  AddCardThunk,
-  FetchDecksThunk,
   QuestionInput,
-} from '../../ts/interfaces';
+  Question,
+  FetchDecksAction,
+  AddDeckAction,
+  EditDeckAction,
+  DeleteDeckAction,
+  AddCardAction,
+  EditCardAction,
+  DeleteCardAction,
+  ThunkOfAction,
+} from '../../ts/types';
 
 import { Dispatch } from 'react';
 
@@ -28,6 +30,20 @@ export const addDeck: (deckName: string) => AddDeckAction = (deckName) => ({
   deckName,
 });
 
+export const editDeck: (deckName: string, deckId: string) => EditDeckAction = (
+  deckName,
+  deckId
+) => ({
+  type: DeckActions.EditDeck,
+  deckName,
+  deckId,
+});
+
+export const deleteDeck: (deckId: string) => DeleteDeckAction = (deckId) => ({
+  type: DeckActions.DeleteDeck,
+  deckId,
+});
+
 export const addCard: (question: Question, deckId: string) => AddCardAction = (
   question,
   deckId
@@ -37,11 +53,31 @@ export const addCard: (question: Question, deckId: string) => AddCardAction = (
   deckId,
 });
 
+export const editCard: (
+  question: Question,
+  deckId: string
+) => EditCardAction = (question, deckId) => ({
+  type: DeckActions.EditCard,
+  question,
+  deckId,
+});
+
+export const deleteCard: (
+  questionId: string,
+  deckId: string
+) => DeleteCardAction = (questionId, deckId) => ({
+  type: DeckActions.DeleteCard,
+  questionId,
+  deckId,
+});
+
 enum StorageKeys {
   Deck = 'DECK',
 }
 
-export const handleAddDeck = (deckName: string): AddDeckThunk => (
+export const handleAddDeck = (
+  deckName: string
+): ThunkOfAction<AddDeckAction> => (
   dispatch: ThunkDispatch<State, void, AddDeckAction>,
   getState: () => State
 ) => {
@@ -57,7 +93,7 @@ export const handleAddDeck = (deckName: string): AddDeckThunk => (
 export const handleAddCard = (
   questionInput: QuestionInput,
   deckId: string
-): AddCardThunk => (
+): ThunkOfAction<AddCardAction> => (
   dispatch: Dispatch<AddCardAction>,
   getState: () => State
 ) => {
@@ -74,7 +110,7 @@ export const handleAddCard = (
   );
 };
 
-export const handleFetchCard = (): FetchDecksThunk => (
+export const handleFetchDecks = (): ThunkOfAction<FetchDecksAction> => (
   dispatch: Dispatch<FetchDecksAction>
 ) => {
   AsyncStorage.getItem(StorageKeys.Deck)

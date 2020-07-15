@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { TouchableOpacity, Text } from 'react-native';
 import styles from '../styles/styles';
-import { Deck } from '../ts/interfaces';
+import { Deck } from '../ts/types';
 
 const DeckCard: FunctionComponent<{
   deck: Deck;

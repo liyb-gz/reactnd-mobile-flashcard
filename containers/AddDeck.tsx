@@ -5,7 +5,7 @@ import { Button, Input } from 'react-native-elements';
 import { tealBlue } from '../styles/colors';
 import { Routes, ModalStackProps } from '../ts/navigation';
 import { StatusBar } from 'expo-status-bar';
-import { AddDeckThunkDispatch } from '../ts/interfaces';
+import { AddDeckThunkDispatch } from '../ts/types';
 import { handleAddDeck } from '../redux/actions/decks';
 import { connect, ConnectedProps } from 'react-redux';
 

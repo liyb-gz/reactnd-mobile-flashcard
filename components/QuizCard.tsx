@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
 import styles from '../styles/styles';
-import { Deck, Question } from '../ts/interfaces';
+import { Deck, Question } from '../ts/types';
 
 const quizCard: FunctionComponent<{
   question: Question;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, Text, TouchableHighlight, View } from 'react-native';
-import { QuestionItemProps } from '../ts/interfaces';
+import { QuestionItemProps } from '../ts/types';
 import styles from '../styles/styles';
 import { lightgray } from '../styles/colors';
 

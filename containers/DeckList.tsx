@@ -12,11 +12,11 @@ import {
 import { StatusBar } from 'expo-status-bar';
 
 import DeckCard from '../components/DeckCard';
-import { State, FetchDecksThunkDispatch } from '../ts/interfaces';
+import { State, DispatchOfAction, FetchDecksAction } from '../ts/types';
 import styles from '../styles/styles';
 import { MainStackProps, Routes } from '../ts/navigation';
 import { Button, Icon } from 'react-native-elements';
-import { handleFetchCard } from '../redux/actions/decks';
+import { handleFetchDecks } from '../redux/actions/decks';
 import * as Notifications from 'expo-notifications';
 import { PermissionStatus } from 'expo-permissions';
 import useAppState from 'react-native-appstate-hook';
@@ -248,9 +248,9 @@ const mapState = (state: State) => ({
   decks: state.decks,
 });
 
-const mapDispatch = (dispatch: FetchDecksThunkDispatch) => {
+const mapDispatch = (dispatch: DispatchOfAction<FetchDecksAction>) => {
   return {
-    fetchDecks: () => dispatch(handleFetchCard()),
+    fetchDecks: () => dispatch(handleFetchDecks()),
   };
 };
 

@@ -7,7 +7,7 @@ import QuestionItem from '../components/QuestionItem';
 import { bottomButtonContainer } from '../styles/buttons';
 import { StatusBar } from 'expo-status-bar';
 import { ConnectedProps, connect } from 'react-redux';
-import { State } from '../ts/interfaces';
+import { State } from '../ts/types';
 import { SwipeListView } from 'react-native-swipe-list-view';
 
 const DeckView = ({

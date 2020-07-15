@@ -1,7 +1,7 @@
 import React from 'react';
 import { Icon } from 'react-native-elements';
 import styles from '../styles/styles';
-import { AddButtonProps } from '../ts/interfaces';
+import { AddButtonProps } from '../ts/types';
 
 const AddButton = ({ onPress, color }: AddButtonProps) => {
   return (

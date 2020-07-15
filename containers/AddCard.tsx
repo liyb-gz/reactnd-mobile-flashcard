@@ -6,7 +6,7 @@ import { Routes, ModalStackProps } from '../ts/navigation';
 import { tealBlue } from '../styles/colors';
 import { StatusBar } from 'expo-status-bar';
 import { ConnectedProps, connect } from 'react-redux';
-import { AddCardThunkDispatch, QuestionInput } from '../ts/interfaces';
+import { AddCardThunkDispatch, QuestionInput } from '../ts/types';
 import { handleAddCard } from '../redux/actions/decks';
 
 const AddCard = ({

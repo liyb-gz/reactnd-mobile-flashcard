@@ -1,6 +1,6 @@
 import { StackNavigationProp } from '@react-navigation/stack';
 import { CompositeNavigationProp, RouteProp } from '@react-navigation/native';
-import { Deck, Question } from './interfaces';
+import { Deck, Question } from './types';
 
 export enum Routes {
   MainStack = 'MainStack',
