@@ -25,7 +25,9 @@ const Quiz = ({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [numOfCorrect, setNumOfCorrect] = useState(0);
   const [shouldShowResult, setShouldShowResult] = useState(false);
+  // isFlipped: is currently filpped
   const [isFlipped, setIsFlipped] = useState(false);
+  // hasFlipped: the flipcard has been flipped before
   const [hasFlipped, setHasFlipped] = useState(false);
 
   const handleSubmit: (props: { correct: boolean }) => void = useCallback(
@@ -41,7 +43,7 @@ const Quiz = ({
         setShouldShowResult(true);
       }
     },
-    [numOfCorrect, currentIndex, hasFlipped, isFlipped, shouldShowResult]
+    [currentIndex]
   );
 
   // Set state is asynchronous.
@@ -61,7 +63,7 @@ const Quiz = ({
   const handlePress = useCallback(() => {
     setHasFlipped(true);
     setIsFlipped((val) => !val);
-  }, [hasFlipped, isFlipped]);
+  }, []);
 
   return (
     <SafeAreaView style={[styles.screen, styles.container]}>
