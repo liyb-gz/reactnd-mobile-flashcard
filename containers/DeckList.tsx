@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useRef } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 
 import {
@@ -22,63 +22,18 @@ import styles from '../styles/styles';
 import { MainStackProps, Routes } from '../ts/navigation';
 import { Button, Icon } from 'react-native-elements';
 import { handleFetchDecks, handleDeleteDeck } from '../redux/actions/decks';
-import * as Notifications from 'expo-notifications';
 import { PermissionStatus } from 'expo-permissions';
+import * as Notifications from 'expo-notifications';
+
 import useAppState from 'react-native-appstate-hook';
-import { NotificationRequestInput } from 'expo-notifications';
-import { showMessage, MessageOptions } from 'react-native-flash-message';
+import { showMessage } from 'react-native-flash-message';
 import { useActionSheet } from '@expo/react-native-action-sheet';
 
-const notification: NotificationRequestInput = {
-  content: {
-    title: 'Daily Reminder',
-    body: 'Remember to work on your flashcards!',
-    sound: true,
-    autoDismiss: false,
-  },
-  trigger: {
-    hour: 20,
-    minute: 0,
-    repeats: true,
-  },
-};
-
-const notificationFlashMessages: { [messageName: string]: MessageOptions } = {
-  on: {
-    message: 'Notification is turned on!',
-    description: 'You will be notified everyday at 8:00 P.M.',
-    type: 'success',
-  },
-  denied: {
-    message: 'Notification permission denied ☹️',
-    description: 'We need your permission to notify you.',
-    type: 'danger',
-  },
-  off: {
-    message: 'Notification is turned off.',
-    description: 'You will no long receive notifications.',
-    type: 'warning',
-  },
-};
-
-const getNotificationIconString = (
-  status: PermissionStatus,
-  hasScheduledNotifications: boolean
-) => {
-  switch (status) {
-    case PermissionStatus.DENIED:
-      return 'notifications-none';
-    case PermissionStatus.GRANTED:
-      if (!hasScheduledNotifications) {
-        return 'notifications-off';
-      } else {
-        return 'notifications-active';
-      }
-    default:
-      // case PermissionStatus.UNDETERMINED:
-      return 'notifications';
-  }
-};
+import {
+  getNotificationIconString,
+  notificationFlashMessages,
+  notification,
+} from '../utils/notification';
 
 const DeckList = ({
   navigation,
@@ -193,7 +148,6 @@ const DeckList = ({
     decks && (
       <SafeAreaView style={[styles.container, styles.screen]}>
         <StatusBar style="light" />
-        {/* TODO: Add swipe action */}
         <FlatList
           data={Object.keys(decks)}
           keyExtractor={(deckId) => deckId}
