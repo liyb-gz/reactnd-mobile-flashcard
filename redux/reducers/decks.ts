@@ -21,6 +21,9 @@ const decks: DeckReducer = (state: DeckState = {}, action: DeckActionTypes) => {
           questions: [],
         },
       };
+    case DeckActions.DeleteDeck:
+      const { [action.deckId]: deckToBeDeleted, ...rest } = state;
+      return rest;
     case DeckActions.AddCard:
       const cardId = ID();
       return {

@@ -12,11 +12,16 @@ import {
 import { StatusBar } from 'expo-status-bar';
 
 import DeckCard from '../components/DeckCard';
-import { State, DispatchOfAction, FetchDecksAction } from '../ts/types';
+import {
+  State,
+  DispatchOfAction,
+  FetchDecksAction,
+  DeleteDeckAction,
+} from '../ts/types';
 import styles from '../styles/styles';
 import { MainStackProps, Routes } from '../ts/navigation';
 import { Button, Icon } from 'react-native-elements';
-import { handleFetchDecks } from '../redux/actions/decks';
+import { handleFetchDecks, handleDeleteDeck } from '../redux/actions/decks';
 import * as Notifications from 'expo-notifications';
 import { PermissionStatus } from 'expo-permissions';
 import useAppState from 'react-native-appstate-hook';
@@ -79,6 +84,7 @@ const DeckList = ({
   navigation,
   fetchDecks,
   decks,
+  deleteDeck,
 }: MainStackProps<Routes.DeckList> & ConnectedProps<typeof connector>) => {
   const { appState } = useAppState();
   const { showActionSheetWithOptions } = useActionSheet();
@@ -207,10 +213,11 @@ const DeckList = ({
                     destructiveButtonIndex: 0,
                     cancelButtonIndex: 2,
                   },
-                  (i) => {
-                    switch (i) {
+                  (index) => {
+                    switch (index) {
                       case 0:
                         console.log('Delete deck: ', deckId);
+                        deleteDeck(deckId);
                         break;
                       case 1:
                         console.log('Edit deck: ', deckId);
@@ -248,9 +255,12 @@ const mapState = (state: State) => ({
   decks: state.decks,
 });
 
-const mapDispatch = (dispatch: DispatchOfAction<FetchDecksAction>) => {
+const mapDispatch = (
+  dispatch: DispatchOfAction<FetchDecksAction | DeleteDeckAction>
+) => {
   return {
     fetchDecks: () => dispatch(handleFetchDecks()),
+    deleteDeck: (deckId: string) => dispatch(handleDeleteDeck(deckId)),
   };
 };
 

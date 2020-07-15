@@ -12,6 +12,7 @@ import {
   EditCardAction,
   DeleteCardAction,
   ThunkOfAction,
+  DispatchOfAction,
 } from '../../ts/types';
 
 import { Dispatch } from 'react';
@@ -78,10 +79,25 @@ enum StorageKeys {
 export const handleAddDeck = (
   deckName: string
 ): ThunkOfAction<AddDeckAction> => (
-  dispatch: ThunkDispatch<State, void, AddDeckAction>,
+  dispatch: DispatchOfAction<AddDeckAction>,
   getState: () => State
 ) => {
   dispatch(addDeck(deckName));
+  const state = getState();
+  AsyncStorage.setItem(StorageKeys.Deck, JSON.stringify(state.decks)).catch(
+    (error) => {
+      console.error('Error: ', error);
+    }
+  );
+};
+
+export const handleDeleteDeck = (
+  deckId: string
+): ThunkOfAction<DeleteDeckAction> => (
+  dispatch: DispatchOfAction<DeleteDeckAction>,
+  getState: () => State
+) => {
+  dispatch(deleteDeck(deckId));
   const state = getState();
   AsyncStorage.setItem(StorageKeys.Deck, JSON.stringify(state.decks)).catch(
     (error) => {

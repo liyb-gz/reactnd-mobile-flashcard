@@ -5,7 +5,7 @@ import { Button, Input } from 'react-native-elements';
 import { tealBlue } from '../styles/colors';
 import { Routes, ModalStackProps } from '../ts/navigation';
 import { StatusBar } from 'expo-status-bar';
-import { AddDeckThunkDispatch } from '../ts/types';
+import { DispatchOfAction, AddDeckAction } from '../ts/types';
 import { handleAddDeck } from '../redux/actions/decks';
 import { connect, ConnectedProps } from 'react-redux';
 
@@ -48,7 +48,7 @@ const AddDeck = ({
   );
 };
 
-const mapDispatch = (dispatch: AddDeckThunkDispatch) => {
+const mapDispatch = (dispatch: DispatchOfAction<AddDeckAction>) => {
   return {
     addDeck: (deckName: string) => dispatch(handleAddDeck(deckName)),
   };
