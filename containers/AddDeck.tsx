@@ -30,10 +30,14 @@ const AddDeck = ({
   const handleSubmit = useCallback(() => {
     if (isEdit && deckId) {
       editDeck(deckName, deckId);
+      navigation.goBack();
     } else {
-      addDeck(deckName);
+      const newDeckId = addDeck(deckName);
+      navigation.navigate(Routes.MainStack, {
+        screen: Routes.DeckView,
+        params: { deckId: newDeckId },
+      });
     }
-    navigation.goBack();
   }, [deckName]);
 
   return (
@@ -85,7 +89,9 @@ const mapState = (state: State, { route }: ModalStackProps<Routes.AddDeck>) => {
 const mapDispatch = (
   dispatch: DispatchOfAction<AddDeckAction | EditDeckAction>
 ) => ({
-  addDeck: (deckName: string) => dispatch(handleAddDeck(deckName)),
+  addDeck: (deckName: string) => {
+    return dispatch(handleAddDeck(deckName));
+  },
   editDeck: (deckName: string, deckId: string) =>
     dispatch(handleEditDeck(deckName, deckId)),
 });

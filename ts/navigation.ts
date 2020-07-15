@@ -1,6 +1,9 @@
 import { StackNavigationProp } from '@react-navigation/stack';
-import { CompositeNavigationProp, RouteProp } from '@react-navigation/native';
-import { Deck, Question } from './types';
+import {
+  CompositeNavigationProp,
+  RouteProp,
+  ParamListBase,
+} from '@react-navigation/native';
 
 export enum Routes {
   MainStack = 'MainStack',
@@ -12,8 +15,14 @@ export enum Routes {
   Result = 'Result',
 }
 
+// https://github.com/react-navigation/react-navigation/issues/6931
+// By frankyjuang
+type SubNavigator<T extends ParamListBase> = {
+  [K in keyof T]: { screen: K; params?: T[K] };
+}[keyof T];
+
 export type ModalStackParamList = {
-  [Routes.MainStack]: undefined;
+  [Routes.MainStack]: SubNavigator<MainStackParamList>;
   [Routes.AddDeck]: { isEdit: true; deckId: string } | undefined;
   [Routes.AddCard]:
     | { isEdit: true; deckId: string; questionId: string }

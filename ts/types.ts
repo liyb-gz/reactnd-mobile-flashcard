@@ -5,6 +5,7 @@ export interface QuestionInput {
   questionText: string;
   answer: string;
 }
+
 export interface Question {
   id: string;
   questionText: string;
@@ -57,7 +58,7 @@ export interface FetchDecksAction {
 
 export interface AddDeckAction {
   type: DeckActions.AddDeck;
-  deckName: string;
+  deck: Deck;
 }
 
 export interface EditDeckAction {
@@ -97,6 +98,8 @@ export type DeckActionTypes =
   | AddCardAction
   | EditCardAction
   | DeleteCardAction;
+
+export type AddDeckThunk = ThunkAction<string, State, null, AddDeckAction>;
 
 export type ThunkOfAction<T extends DeckActionTypes> = ThunkAction<
   void,

@@ -6,7 +6,6 @@ import {
   Question,
 } from '../../ts/types';
 
-import ID from '../../utils/ID';
 import produce from 'immer';
 
 const decks: DeckReducer = (state: DeckState = {}, action: DeckActionTypes) => {
@@ -15,14 +14,9 @@ const decks: DeckReducer = (state: DeckState = {}, action: DeckActionTypes) => {
       return action.decks;
 
     case DeckActions.AddDeck:
-      const newDeckId = ID();
-      const newDeck = {
-        id: newDeckId,
-        title: action.deckName,
-        questions: {},
-      };
+      const { deck } = action;
       return produce(state, (draft) => {
-        draft[newDeckId] = newDeck;
+        draft[deck.id] = deck;
       });
 
     case DeckActions.EditDeck:
@@ -36,19 +30,17 @@ const decks: DeckReducer = (state: DeckState = {}, action: DeckActionTypes) => {
       });
 
     case DeckActions.AddCard:
-      const cardId = ID();
-      const newQuestion: Question = {
-        ...action.question,
-        id: cardId,
-      };
+      const { deckId, question: questionToBeAdded } = action;
       return produce(state, (draft) => {
-        draft[action.deckId].questions[cardId] = newQuestion;
+        draft[deckId].questions[questionToBeAdded.id] = questionToBeAdded;
       });
 
     case DeckActions.EditCard:
-      const { deckId: deckIdToBeEdited, question } = action;
+      const { deckId: deckIdToBeEdited, question: questionToBeEdited } = action;
       return produce(state, (draft) => {
-        draft[deckIdToBeEdited].questions[question.id] = question;
+        draft[deckIdToBeEdited].questions[
+          questionToBeEdited.id
+        ] = questionToBeEdited;
       });
 
     case DeckActions.DeleteCard:

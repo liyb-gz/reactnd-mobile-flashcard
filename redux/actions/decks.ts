@@ -13,6 +13,8 @@ import {
   DeleteCardAction,
   ThunkOfAction,
   DispatchOfAction,
+  Deck,
+  AddDeckThunk,
 } from '../../ts/types';
 
 import { Dispatch } from 'react';
@@ -26,9 +28,9 @@ export const fetchDecks: (decks: DeckState) => FetchDecksAction = (decks) => ({
   decks,
 });
 
-export const addDeck: (deckName: string) => AddDeckAction = (deckName) => ({
+export const addDeck: (deck: Deck) => AddDeckAction = (deck) => ({
   type: DeckActions.AddDeck,
-  deckName,
+  deck,
 });
 
 export const editDeck: (deckName: string, deckId: string) => EditDeckAction = (
@@ -84,14 +86,18 @@ const saveStateToAsyncStorage = (state: State) => {
   );
 };
 
-export const handleAddDeck = (
-  deckName: string
-): ThunkOfAction<AddDeckAction> => (
+export const handleAddDeck = (deckName: string): AddDeckThunk => (
   dispatch: DispatchOfAction<AddDeckAction>,
   getState: () => State
 ) => {
-  dispatch(addDeck(deckName));
+  const deck: Deck = {
+    id: ID(),
+    title: deckName,
+    questions: {},
+  };
+  dispatch(addDeck(deck));
   saveStateToAsyncStorage(getState());
+  return deck.id;
 };
 
 export const handleEditDeck = (
