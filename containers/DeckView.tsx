@@ -7,14 +7,16 @@ import QuestionItem from '../components/QuestionItem';
 import { bottomButtonContainer } from '../styles/buttons';
 import { StatusBar } from 'expo-status-bar';
 import { ConnectedProps, connect } from 'react-redux';
-import { State } from '../ts/types';
+import { State, DispatchOfAction, DeleteCardAction } from '../ts/types';
 import { SwipeListView } from 'react-native-swipe-list-view';
+import { handleDeleteCard } from '../redux/actions/decks';
 
 const DeckView = ({
   navigation,
   questions,
   title,
   deckId,
+  deleteCard,
 }: MainStackProps<Routes.DeckView> & ConnectedProps<typeof connector>) => {
   useEffect(() => {
     const numOfQuestions = Object.keys(questions).length;
@@ -31,7 +33,7 @@ const DeckView = ({
       <StatusBar style="light" />
       <SwipeListView
         data={Object.keys(questions)}
-        keyExtractor={(item) => item}
+        keyExtractor={(questionId) => questionId}
         renderItem={({ item: questionId }) => (
           <QuestionItem
             question={questions[questionId]}
@@ -50,11 +52,14 @@ const DeckView = ({
             <Text style={styles.listEmptyText}>Add a card to get started</Text>
           </View>
         )}
-        renderHiddenItem={({ item }) => (
+        renderHiddenItem={({ item: questionId }) => (
           <View style={styles.listRowBack}>
             <TouchableOpacity
               style={[styles.listBackRightBtn]}
-              onPress={() => console.log('delete card: ', deckId, item)}
+              onPress={() => {
+                console.log('delete card params:', questionId, deckId);
+                deleteCard(questionId, deckId);
+              }}
             >
               <Text style={styles.listBackTextWhite}>Delete</Text>
             </TouchableOpacity>
@@ -97,6 +102,11 @@ const mapState = (state: State, { route }: MainStackProps<Routes.DeckView>) => {
   };
 };
 
-const connector = connect(mapState);
+const mapDispatch = (dispatch: DispatchOfAction<DeleteCardAction>) => ({
+  deleteCard: (questionId: string, deckId: string) =>
+    dispatch(handleDeleteCard(questionId, deckId)),
+});
+
+const connector = connect(mapState, mapDispatch);
 
 export default connector(DeckView);

@@ -141,6 +141,17 @@ export const handleEditCard = (
   saveStateToAsyncStorage(getState());
 };
 
+export const handleDeleteCard = (
+  questionId: string,
+  deckId: string
+): ThunkOfAction<DeleteCardAction> => (
+  dispatch: Dispatch<DeleteCardAction>,
+  getState: () => State
+) => {
+  dispatch(deleteCard(questionId, deckId));
+  saveStateToAsyncStorage(getState());
+};
+
 export const handleFetchDecks = (): ThunkOfAction<FetchDecksAction> => (
   dispatch: Dispatch<FetchDecksAction>
 ) => {
