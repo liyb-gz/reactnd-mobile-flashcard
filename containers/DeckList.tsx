@@ -22,8 +22,17 @@ import styles from '../styles/styles';
 import { MainStackProps, Routes } from '../ts/navigation';
 import { Button, Icon } from 'react-native-elements';
 import { handleFetchDecks, handleDeleteDeck } from '../redux/actions/decks';
-import { PermissionStatus } from 'expo-permissions';
-import * as Notifications from 'expo-notifications';
+import {
+  PermissionStatus,
+  askAsync as askPermissionsAsync,
+  USER_FACING_NOTIFICATIONS,
+  getAsync as getPermissionsAsync,
+} from 'expo-permissions';
+import {
+  getAllScheduledNotificationsAsync,
+  cancelAllScheduledNotificationsAsync,
+  scheduleNotificationAsync,
+} from 'expo-notifications';
 
 import useAppState from 'react-native-appstate-hook';
 import { showMessage } from 'react-native-flash-message';
@@ -55,23 +64,23 @@ const DeckList = ({
 
   // Update the states based on notification status
   const getNotificationStatus = useCallback(async () => {
-    const { status } = await Notifications.getPermissionsAsync();
+    const { status } = await getPermissionsAsync(USER_FACING_NOTIFICATIONS);
     setNotificationStatus(status);
 
     if (status === PermissionStatus.GRANTED) {
-      const scheduledNotifications = await Notifications.getAllScheduledNotificationsAsync();
+      const scheduledNotifications = await getAllScheduledNotificationsAsync();
       setHasScheduledNotifications(scheduledNotifications.length > 0);
     }
   }, []);
 
   const cancelAllNotifications = useCallback(async () => {
-    await Notifications.cancelAllScheduledNotificationsAsync();
+    await cancelAllScheduledNotificationsAsync();
     showMessage(notificationFlashMessages.off);
     setShouldUpdateStatus(true);
   }, []);
 
   const scheduleNotification = useCallback(async () => {
-    await Notifications.scheduleNotificationAsync(notification);
+    await scheduleNotificationAsync(notification);
     showMessage(notificationFlashMessages.on);
     setShouldUpdateStatus(true);
   }, []);
@@ -90,7 +99,7 @@ const DeckList = ({
         break;
 
       case PermissionStatus.UNDETERMINED:
-        const { status } = await Notifications.requestPermissionsAsync();
+        const { status } = await askPermissionsAsync(USER_FACING_NOTIFICATIONS);
         if (status === PermissionStatus.GRANTED) {
           scheduleNotification();
         } else {

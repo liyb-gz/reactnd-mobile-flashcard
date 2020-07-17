@@ -20,7 +20,6 @@ import {
 import { Dispatch } from 'react';
 
 import AsyncStorage from '@react-native-community/async-storage';
-import { ThunkDispatch } from 'redux-thunk';
 import ID from '../../utils/ID';
 
 export const fetchDecks: (decks: DeckState) => FetchDecksAction = (decks) => ({
