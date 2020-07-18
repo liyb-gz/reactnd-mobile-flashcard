@@ -12,5 +12,12 @@
     "strictFunctionTypes": true,
     "strictNullChecks": true,
     "noImplicitAny": true
+    // "noEmit": false,
+    // "target": "ESNext",
+    // "noImplicitAny": true,
+    // "outDir": "../flashcard-js",
+    // "preserveConstEnums": true
   }
+  // "include": ["**/*"],
+  // "exclude": ["node_modules"]
 }
